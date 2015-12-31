@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "../www/scripts/"
+  },
+  "filesGlob": [
+    "scripts/**/*.ts",
+    "scripts/typings/**/*.d.ts"
+  ]
+}

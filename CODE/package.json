@@ -1,0 +1,15 @@
+{
+  "name": "jspm_testing",
+  "version": "1.0.0",
+  "dependencies": {
+    "systemjs": "0.19.9",
+    "jquery": "2.1.4",
+    "angular2": "2.0.0-beta.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-tsd": "0.0.4",
+    "gulp-tslint": "4.2.2",
+    "browser-sync": "2.10.1"
+  }
+}

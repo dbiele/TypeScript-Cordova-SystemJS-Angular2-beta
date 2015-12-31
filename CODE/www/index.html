@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="expires" content="wed, 7 Oct 2015 01:00:00 GMT" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="BlankCordovaApp6ang2node" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+
+        More information about Cordova's content security policy:
+        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+
+        Additional Information:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <meta http-equiv="Content-Security-Policy" content="default-src https: 'self' *.jspm.io data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline' ws://localhost:*; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.jspm.io https://*.angularjs.org; media-src *">
+
+    <title>BlankCordovaApp6ang2node</title>
+
+    <!-- BlankCordovaApp6ang2node references -->
+    <link href="css/index.css" rel="stylesheet" />
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <!-- platform overrides includes system-polyfills for mobile. platformOverrides.js is located in ./merges folder -->
+    <script src="scripts/platformOverrides.js"></script>
+
+    <!-- Add Angular2 -->
+
+    <script src="scripts/lib/angular2/bundles/angular2-polyfills.js"></script>
+
+
+    <!-- Add mobile override for Windows 10 devices  -->
+    <script src="scripts/mobiledeviceoverride.js"></script>
+    <!-- adding systemjs -->
+    <script src="scripts/lib/systemjs/dist/system.js"></script>
+    <script src="scripts/config.js"></script>
+
+    <!-- RX filles in the gap since Angular relies on Observables.  Observables are native to es2016 -->
+    <script src="scripts/lib/rxjs/bundles/Rx.js"></script>
+    <script src="scripts/lib/angular2/bundles/angular2.dev.js"></script>
+
+</head>
+<body>
+    <p>Hello, your application is ready!</p>
+    <test-app>Loading</test-app>
+    <script src="scripts/start.js"></script>
+</body>
+</html>
