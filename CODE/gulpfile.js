@@ -46,5 +46,5 @@ gulp.task('browser.sync', function () {
     });
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
-    //gulp.watch("js/*.js", ['browser.sync.js-watch']);
+    //gulp.watch("./www/scripts/*.js", ['browser.sync.js-watch']);
 });
