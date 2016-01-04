@@ -13,6 +13,7 @@ I used the angular example from [https://angular.io/](https://angular.io/)
 - copy the angular bundles and platform folder from node_modues to www/scripts/lib/angular2 folder.  Maybe add a build step?
 - Add the angular code to index.html
 - Changed tsconfig.json to use filesGlob instead of exclude
+- Use Cordova CLI 5.3.3.  Cordova CLI greater than 5.3.3 seems to cause problems with Emulators.
 
     ,
       "exclude": [
