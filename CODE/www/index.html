@@ -43,7 +43,7 @@
     <script src="scripts/lib/angular2/bundles/angular2-polyfills.js"></script>
 
 
-    <!-- Add mobile override for Windows 10 devices  -->
+    <!-- Add mobile override for es6-shims when using es5 JavaScript.  This was a problem with Angular2 in the past and seems to be fixed.    -->
     <script src="scripts/mobiledeviceoverride.js"></script>
     <!-- adding systemjs -->
     <script src="scripts/lib/systemjs/dist/system.js"></script>
@@ -52,7 +52,6 @@
     <!-- RX filles in the gap since Angular relies on Observables.  Observables are native to es2016 -->
     <script src="scripts/lib/rxjs/bundles/Rx.js"></script>
     <script src="scripts/lib/angular2/bundles/angular2.dev.js"></script>
-
 </head>
 <body>
     <p>Hello, your application is ready!</p>
