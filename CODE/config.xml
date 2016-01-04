@@ -110,6 +110,6 @@
   <preference name="InAppBrowserStorageEnabled" value="True" />
   <preference name="SuppressesIncrementalRendering" value="True" />
   <vs:plugin name="cordova-plugin-crosswalk-webview" version="1.4.0" />
-  <vs:plugin name="cordova-plugin-whitelist" version="1.2.0" />
   <preference name="android-minSdkVersion" value="14" />
+  <vs:plugin name="cordova-plugin-whitelist" version="1.2.0" />
 </widget>
