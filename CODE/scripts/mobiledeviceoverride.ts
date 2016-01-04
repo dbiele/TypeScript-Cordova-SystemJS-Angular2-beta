@@ -1,10 +1,10 @@
 var isMobile = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i);
 /** 
- * Need to disable adding es6-shim.js for Windows 10 mobile devices.  Let merges folder handle android, ios and windows additions.
- * Error occurs in Windows Phone Universal when es6-shim.js is linked.
- * es6-shim is necessary for all browsers.
+ * es6-shim is necessary for all browsers.  This was a problem with previous versions on Angular2.
  */
-if (isMobile == null) {
+console.log('isMobile = ' + isMobile);
+//if (isMobile != null) {
+    console.log('add es6shim');
     var scriptElem = document.createElement('script');
     scriptElem.setAttribute('src', 'scripts/lib/es6-shim/es6-shim.js');
     if (document.body) {
@@ -12,4 +12,4 @@ if (isMobile == null) {
     } else {
         document.head.appendChild(scriptElem);
     }
-}
+//}
