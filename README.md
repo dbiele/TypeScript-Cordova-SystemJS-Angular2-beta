@@ -1,4 +1,12 @@
-# Starter Kit for VS2015 + TypeScript-Cordova-SystemJS-Angular2-beta
+[![Build Status](https://travis-ci.org/angular/angular.svg?branch=master)](https://travis-ci.org/angular/angular) 
+[![Join the chat at https://vs2015cordovaangular2.slack.com](http://dbiele.github.io/images/slackchat.svg)](https://vs2015cordovaangular2.slack.com)
+[![Issue Stats](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta/badge/pr)](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta)
+[![Issue Stats](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta/badge/issue)](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta)
+
+
+
+Starter Kit for VS2015 + TypeScript-Cordova-SystemJS-Angular2-beta
+=========
 Visual Studio 2015 project, source code and documentation 
 
 The purpose of this VS2015 project is to provide a simple starter project structure for creating `TypeScript + Cordova + Angular2 beta' apps. 
