@@ -1,7 +1,7 @@
-# TypeScript-Cordova-SystemJS-Angular2-beta
-VS2015 Project and Source Code
+# Starter Kit for VS2015 + TypeScript-Cordova-SystemJS-Angular2-beta
+Visual Studio 2015 project, source code and documentation 
 
-The purpose of this VS2015 project is to provide a simple project structure for creating `TypeScript + Cordova + Angular2 beta' apps. 
+The purpose of this VS2015 project is to provide a simple starter project structure for creating `TypeScript + Cordova + Angular2 beta' apps. 
 
 Once the repository is downloaded, open the `cordova-angular2.sln` to start building apps.  All files will automatically download when opened in VS2015 or when the app is published.
 
