@@ -19,6 +19,8 @@ Here's what your build will look like:
 ![MANAGEMENT/md/media/emulator_app.png](MANAGEMENT/md/media/emulator_app.png)
 
 
+[![Appetizeio](MANAGEMENT/md/media/taptoplay.PNG)](https://appetize.io/app/p860c4y7gf08v4q44eb860vfqm?device=nexus5&scale=75&orientation=portrait&osVersion=6.0)
+
 # Getting Started #
 
 
