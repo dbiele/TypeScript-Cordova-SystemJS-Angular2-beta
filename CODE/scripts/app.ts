@@ -1,3 +1,4 @@
+//import {enableDebugTools} from 'angular2/platform/browser';
 /**
  * Used to demonstrate external module is loading and function is called.
  */
@@ -8,4 +9,7 @@ import {AppComponent} from './app/app.component';
 export function appExternalModuleTest(): void {
     console.log('testmodules called in testExternalModules');
     bootstrap(AppComponent);
+    
+    //enable debug tools
+    //bootstrap(AppComponent).then((appRef) => { enableDebugTools(appRef); });
 }
