@@ -1,7 +1,9 @@
-//import {enableDebugTools} from 'angular2/platform/browser';
+
 /**
  * Used to demonstrate external module is loading and function is called.
  */
+
+//import {enableDebugTools} from 'angular2/platform/browser';
 
 import {bootstrap} from 'angular2/platform/browser';
 import {AppComponent} from './app/app.component';
