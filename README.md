@@ -21,6 +21,16 @@ Here's what your build will look like:
 
 [![Appetizeio](MANAGEMENT/md/media/taptoplay.PNG)](https://appetize.io/app/p860c4y7gf08v4q44eb860vfqm?device=nexus5&scale=75&orientation=portrait&osVersion=6.0)
 
+## To Do ##
+
+Adding the following
+
+- [ ] Add E2E testing framework using protractor
+- [ ] Add Unit testing frameworks Karma
+- [ ] Add Test Runner Jasmine
+- [ ] Add CI server Travis-CLI
+- [ ] Add Mock Cordova GPS functionality
+
 # Getting Started #
 
 
@@ -447,6 +457,26 @@ The baseURL is the folder that’s referenced as the root/base of systemjs.
 
 You can add system.import in index.html, but I prefer to include it in separate .js file.  Better yet, add it to a .ts file and use a script tag in index.html to point to the external .js in the scripts folder
 
+
+## SystemJS Notes ##
+SystemJS doesn't have 100% coverage of comments.  So when making comments in code that transpiles to ES5, be aware that comments may introduce problems 
+
+*Module format detection in SystemJS is not designed to be 100% accurate, it is designed to cater to the majority use case. -- Buy Bedford*
+
+Example:
+The following comments don't work.
+
+    // import {enableDebugTools} from 'angular2/platform/browser';
+    /**
+     * Used to demonstrate external module is loading and function is called.
+     */
+
+However, if I change the comments to use the following comment structure, I don't get an error:
+
+    // import {enableDebugTools} from 'angular2/platform/browser';
+    // Used to demonstrate external module is loading and function is called.
+
+You can remove comments by changing tsconfig.json  `"removeComments": false,` to `"removeComments": true,`.
 
 ## Merges Folder ##
 
