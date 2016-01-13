@@ -8,6 +8,6 @@ export function appExternalModuleTest(): void {
     console.log('testmodules called in testExternalModules');
     bootstrap(AppComponent);
     
-    //enable debug tools
+    //enable angular2 debug tools
     //bootstrap(AppComponent).then((appRef) => { enableDebugTools(appRef); });
 }
