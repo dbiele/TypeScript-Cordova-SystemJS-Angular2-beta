@@ -1,11 +1,9 @@
 ﻿import {appExternalModuleTest} from './app';
 
 /**
- * Called from start.ts
+ * Called from start.ts after systemjs bootstap
  */
 export function initialize():void {
-    var aString: string = 'hello, World!';
-    console.log('app.ts string =' + aString);
     initializeCordova();
 }
 
