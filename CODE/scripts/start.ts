@@ -1,4 +1,4 @@
-console.log('starting browser name 2 = ' + window.navigator.userAgent);
+// Embedded in index.html
 function bootstrapApp(m) {
     m.initialize();
 }
