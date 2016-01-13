@@ -12,6 +12,6 @@
     "outDir": "../www/scripts/"
   },
   "exclude": [
-    "../www/scripts/tests"
+    "../www/scripts/tests/"
   ]
 }
