@@ -11,8 +11,7 @@
     "experimentalDecorators": true,
     "outDir": "../www/scripts/"
   },
-  "filesGlob": [
-    "scripts/**/*.ts",
-    "scripts/typings/**/*.d.ts"
+  "exclude": [
+    "../www/scripts/tests"
   ]
 }
