@@ -1,8 +1,22 @@
 'use strict';
+
+
 var gulp = require('gulp');
 var tsd = require('gulp-tsd');
 var tslint = require('gulp-tslint');
 var browserSync = require('browser-sync');
+var del = require('del');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var plugins = gulpLoadPlugins();
+//plugins.typescript = require('typescript');
+var tsrequire = require('gulp-typescript');
+var karma = require('karma');
+
+
+var checkEnvironment = require('./tools/check-environment.js');
+gulp.task('check.NPM+NODE.version', function () {
+    checkEnvironment({ requiredNpmVersion: '>=2.14.7 <3.0.0', requiredNodeVersion: '>=4.2.1 <5.0.0' });
+});
 
 gulp.task('install.tsd.files', function (callback) {
     tsd({
@@ -12,6 +26,8 @@ gulp.task('install.tsd.files', function (callback) {
 });
 
 gulp.task('tslint', function () {
+    // Rules can be found here
+    // https://github.com/palantir/tslint#supported-rules
     var tslintConfig = {
         "rules": {
             "semicolon": true,
@@ -22,18 +38,18 @@ gulp.task('tslint', function () {
             "variable-name": [true, "allow-leading-underscore"]
         }
     };
-
     return gulp.src(['scripts/**/*.ts', '!scripts/typings/**'])
         //Custom rules can be added to configuration.  rulesDirectory: 'folder/folder'
-      .pipe(tslint({ configuration: tslintConfig }))
+      .pipe(tslint({
+          configuration: tslintConfig
+      }))
       .pipe(tslint.report('verbose', { emitError: true, reportLimit: 0 }));
 
 });
 
-
 //gulp.task('copy.htmlfiles.www', function () {
-    //gulp.src(['./scripts/test/cssbutton/components/**/*.html', './scripts/test/md-to-html/**/*.html'])
-    //.pipe(gulp.dest('./www/components/'));
+//gulp.src(['./scripts/test/cssbutton/components/**/*.html', './scripts/test/md-to-html/**/*.html'])
+//.pipe(gulp.dest('./www/components/'));
 //});
 
 //gulp.task('browser.sync.js-watch', ['js'], browserSync.reload);
@@ -48,3 +64,102 @@ gulp.task('browser.sync', function () {
     // all browsers reload after tasks are complete.
     //gulp.watch("./www/scripts/*.js", ['browser.sync.js-watch']);
 });
+
+//var treatTestErrorsAsFatal = true;
+
+//function runJasmineTests(globs, done) {
+//    // spawn a new node.js instance.
+//    var fork = require('child_process').fork;
+//    var args = ['--'].concat(globs);
+//    //args = --,dist/tools/**/*.spec.js,tools/**/*.spec.js
+//    //load the ./tools/cjs-jasmine/index.js file
+//    fork('./tools/cjs-jasmine', args, { stdio: 'inherit' })
+//        .on('close', function jasmineCloseHandler(exitCode) {
+//            if (exitCode && treatTestErrorsAsFatal) {
+//                var err = new Error('Jasmine tests failed');
+//                // Mark the error for gulp similar to how gulp-utils.PluginError does it.
+//                // The stack is not useful in this context.
+//                err.showStack = false;
+//                done(err);
+//            } else {
+//                done();
+//            }
+//        });
+//}
+
+//gulp.task('test.unit.tools/ci', function (done) {
+//    runJasmineTests(['dist/tools/**/*.spec.js', 'tools/**/*[sS]pec.js'], done);
+//});
+
+
+// Minify and copy all JavaScript (except vendor scripts)
+// with sourcemaps all the way down
+//function scripts() {
+//    return gulp.src(paths.scripts)
+//      .pipe(sourcemaps.init())
+//        .pipe(coffee())
+//        .pipe(uglify())
+//        .pipe(concat('all.min.js'))
+//      .pipe(sourcemaps.write())
+//      .pipe(gulp.dest('build/js'));
+//}
+
+// remove the karma folder.
+function karmaClean() {
+    //You can use multiple globbing patterns as you would with `gulp.src`
+    //If you are using del 2.0 or above, return its promise
+    return del(['.karma']);
+}
+
+function karmaTsSpec() {
+    // takes the .ts files from .karma/unit and converts to .js
+    return karmaTs('scripts/tests/unit');
+}
+
+function ts(filesRoot, filesGlob, filesDest, project) {
+    //return gulp.src(filesRoot+'/**/*.ts')
+    //.pipe(tsrequire({
+    //    noImplicitAny: true,
+    //}))
+    //.pipe(gulp.dest(filesDest));
+
+    return gulp.src(filesGlob)
+		.pipe(plugins.typescript(project))
+        .pipe(gulp.dest(filesDest));
+}
+
+function karmaTs(root) {
+    var project = plugins.typescript.createProject('./scripts/tsconfig.json', {
+        outDir: '.karma'
+    });
+
+    var filesRoot = root;
+    var filesDest = '.karma';
+    var filesGlob = [
+		root + '/**/*.ts'
+    ];
+    return ts(filesRoot, filesGlob, filesDest, project);
+}
+
+function karmaRun(done) {
+    return new karma.Server({
+        configFile: __dirname + '/tools/karma.conf.js'
+    }, done).start();
+}
+
+//gulp.task('unit.test.karma', gulp.series(
+//    //clear the karma folder
+//    karmaClean,
+//    // convert the .ts files to .js and save in karma folder
+//    karmaTsSpec
+//    // run the karma server
+//    // delete the karma folder?
+//));
+gulp.task('unit.test.karma', gulp.series(
+    //clear the karma folder
+    karmaClean,
+    // convert the .ts files to .js and save in karma folder
+    karmaTsSpec,
+    // run the karma server
+    karmaRun
+));
