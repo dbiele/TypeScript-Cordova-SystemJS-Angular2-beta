@@ -9,9 +9,10 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "../www/scripts/"
+    "outDir": "../www/scripts/",
+    "rootDir": "."
   },
   "exclude": [
-    "tests"
+
   ]
 }
