@@ -15,9 +15,10 @@ var semver;
 
 var issues = [];
 
-//// coarse Node version check
+//// coarse Node version check.
 if (process.version[1] !== '4') {
-    issues.push("Angular 2 build currently requires Node 4. Use nvm to update your node version.");
+    issues.push('Angular 2 build currently requires Node 4. Your current Node version is: ' + process.version);
+    issues.push('Use nvm to update your node version.');
 }
 
 try {
@@ -25,7 +26,6 @@ try {
 } catch (e) {
     issues.push("Looks like you are missing some npm dependencies. Run: npm install");
 }
-
 printWarning(issues);
 
 // wrap in try/catch in case someone requires from within that file
@@ -40,11 +40,10 @@ printWarning(issues);
 //}
 
 
-function checkEnvironment(reqs) {
+function checkEnvironment(reqs, done) {
     exec('npm --version', function (e, stdout) {
         var foundNpmVersion = semver.clean(stdout);
         var foundNodeVersion = process.version;
-        console.log('You are running Node version = ' + foundNodeVersion + '. You are running NPM version = ' + foundNpmVersion);
         var issues = [];
         if (!semver.satisfies(foundNodeVersion, reqs.requiredNodeVersion)) {
             issues.push('You are running unsupported node version. Found: ' + foundNodeVersion +
@@ -61,8 +60,9 @@ function checkEnvironment(reqs) {
         //}
 
         printWarning(issues);
-        console.log('Check environment complete')
+        done();
     });
+    
 }
 
 function printWarning(issues) {
