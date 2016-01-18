@@ -13,29 +13,26 @@
     "url": "https://github.com/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta.git"
   },
   "dependencies": {
-    "systemjs": "^0.19.13",
-    "angular2": "2.0.0-beta.0"
+    "angular2": "2.0.0-beta.0",
+    "systemjs": "^0.19.13"
   },
   "devDependencies": {
-    "browser-sync": "2.10.1",
-    "glob": "^6.0.3",
+    "browser-sync": "^2.11.0",
+    "del": "^2.2.0",
     "gulp": "git://github.com/gulpjs/gulp.git#4.0",
     "gulp-tsd": "0.0.4",
     "gulp-tslint": "4.2.2",
     "gulp-load-plugins": "^1.2.0",
     "gulp-typescript": "2.10.0",
+    "gulp-sourcemaps": "^1.6.0",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
-    "karma-firefox-launcher": "^0.1.7",
     "karma-ie-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.3",
     "karma-jasmine-html-reporter": "^0.2.0",
-    "karma-coverage": "^0.5.3",
-    "phantomjs": "^1.9.19",
-    "del": "^2.2.0",
-    "typescript": "1.7.5",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-phantomjs2-launcher": "0.4.0",
     "semver": "^5.1.0",
-    "npm": "2.14.15"
+    "npm": "^3.5.3"
   }
 }
