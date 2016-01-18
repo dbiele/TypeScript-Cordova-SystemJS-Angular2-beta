@@ -66,45 +66,6 @@ gulp.task('browser.sync', function () {
     //gulp.watch("./www/scripts/*.js", ['browser.sync.js-watch']);
 });
 
-//var treatTestErrorsAsFatal = true;
-
-//function runJasmineTests(globs, done) {
-//    // spawn a new node.js instance.
-//    var fork = require('child_process').fork;
-//    var args = ['--'].concat(globs);
-//    //args = --,dist/tools/**/*.spec.js,tools/**/*.spec.js
-//    //load the ./tools/cjs-jasmine/index.js file
-//    fork('./tools/cjs-jasmine', args, { stdio: 'inherit' })
-//        .on('close', function jasmineCloseHandler(exitCode) {
-//            if (exitCode && treatTestErrorsAsFatal) {
-//                var err = new Error('Jasmine tests failed');
-//                // Mark the error for gulp similar to how gulp-utils.PluginError does it.
-//                // The stack is not useful in this context.
-//                err.showStack = false;
-//                done(err);
-//            } else {
-//                done();
-//            }
-//        });
-//}
-
-//gulp.task('test.unit.tools/ci', function (done) {
-//    runJasmineTests(['dist/tools/**/*.spec.js', 'tools/**/*[sS]pec.js'], done);
-//});
-
-
-// Minify and copy all JavaScript (except vendor scripts)
-// with sourcemaps all the way down
-//function scripts() {
-//    return gulp.src(paths.scripts)
-//      .pipe(sourcemaps.init())
-//        .pipe(coffee())
-//        .pipe(uglify())
-//        .pipe(concat('all.min.js'))
-//      .pipe(sourcemaps.write())
-//      .pipe(gulp.dest('build/js'));
-//}
-
 // remove the karma folder.
 function karmaClean() {
     //You can use multiple globbing patterns as you would with `gulp.src`
