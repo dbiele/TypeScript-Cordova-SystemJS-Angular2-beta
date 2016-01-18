@@ -6,16 +6,17 @@ var tsd = require('gulp-tsd');
 var tslint = require('gulp-tslint');
 var browserSync = require('browser-sync');
 var del = require('del');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var plugins = gulpLoadPlugins();
-//plugins.typescript = require('typescript');
+var plugins = require('gulp-load-plugins')();
 var tsrequire = require('gulp-typescript');
 var karma = require('karma');
+var sourceMaps = require('gulp-sourcemaps');
 
 
-var checkEnvironment = require('./tools/check-environment.js');
-gulp.task('check.NPM+NODE.version', function () {
-    checkEnvironment({ requiredNpmVersion: '>=2.14.7 <3.0.0', requiredNodeVersion: '>=4.2.1 <5.0.0' });
+
+gulp.task('NPM+NODE.version', function (done) {
+    // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
+    var checkEnvironment = require('./tools/check-environment.js');
+    checkEnvironment({ requiredNpmVersion: '>=2.14.7 <3.0.0', requiredNodeVersion: '>=4.2.1 <5.0.0' }, done);
 });
 
 gulp.task('install.tsd.files', function (callback) {
@@ -123,9 +124,13 @@ function ts(filesRoot, filesGlob, filesDest, project) {
     //}))
     //.pipe(gulp.dest(filesDest));
 
-    return gulp.src(filesGlob)
+    var results =  gulp.src(filesGlob)
+        .pipe(plugins.sourcemaps.init())
 		.pipe(plugins.typescript(project))
-        .pipe(gulp.dest(filesDest));
+
+    return results.js
+        .pipe(plugins.sourcemaps.write())
+        .pipe(gulp.dest(filesDest))
 }
 
 function karmaTs(root) {
@@ -147,19 +152,12 @@ function karmaRun(done) {
     }, done).start();
 }
 
-//gulp.task('unit.test.karma', gulp.series(
-//    //clear the karma folder
-//    karmaClean,
-//    // convert the .ts files to .js and save in karma folder
-//    karmaTsSpec
-//    // run the karma server
-//    // delete the karma folder?
-//));
 gulp.task('unit.test.karma', gulp.series(
+    // Remember take in a callback or return a promise or event stream to avoid gulp 'The following tasks did not complete.'
     //clear the karma folder
-    karmaClean,
+    //karmaClean,
     // convert the .ts files to .js and save in karma folder
-    karmaTsSpec,
+    //karmaTsSpec,
     // run the karma server
     karmaRun
 ));
