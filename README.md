@@ -26,8 +26,8 @@ Here's what your build will look like:
 Adding the following
 
 - [ ] Add E2E testing framework using protractor
-- [ ] Add Unit testing frameworks Karma
-- [ ] Add Test Runner Jasmine
+- [X] Add Unit testing frameworks Karma
+- [X] Add Test Runner Jasmine
 - [ ] Add CI server Travis-CLI
 - [ ] Add Mock Cordova GPS functionality
 
@@ -610,6 +610,8 @@ Publishing: Get it on the device
 
 
 
+# Unit Testing #
+Coming soon.
 
 -
 -
