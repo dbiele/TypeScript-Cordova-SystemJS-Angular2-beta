@@ -1,5 +1,4 @@
-﻿//original code https://gist.github.com/sasxa/0939f5bb00285e82af21
-
+﻿// Original code provide by @sasxa https://gist.github.com/sasxa/0939f5bb00285e82af21
 /**
  *  Turn on full stack traces in errors to help debugging 
  * */
@@ -13,12 +12,11 @@ __karma__.loaded = function () { };
 var pathsMapping = function (path) {
     var pathFilter = new RegExp(path.replace('/', '\\/') + '.*\/.*\.js$');
     var pathReplace = new RegExp('^' + path.replace('/', '\\/'));
-    console.log('pathsmapping = ' + pathFilter.source, pathReplace.source);
-
+    //console.log('------------------------'+pathFilter.source, pathReplace.source);
 
     return Object.keys(window.__karma__.files)
       .filter(function (path) { return pathFilter.test(path); })
-      // .filter(function (path) { console.log(path); return true; })
+      //.filter(function (path) { console.log(path); return true; })
       .reduce(function (systemjsPaths, karmaPath) {
           /**
            * Creates local module name mapping to global path with karma's fingerprint in path, e.g.:
@@ -38,33 +36,26 @@ var pathsMapping = function (path) {
  * locate user modules served by Karma.
  */
 System.config({
-    baseURL: '../scripts/',
-    defaultJSExtensions: true,
-    transpiler: "none"
-    //packages: {
-    //    './scripts': {
-    //        defaultExtension: false,
-    //        format: 'register',
-    //        map: pathsMapping('www/scripts/')
-    //    },
-    //    './scripts': {
-    //        defaultExtension: false,
-    //        format: 'register',
-    //        map: pathsMapping('www/scripts/')
-    //    },
-    //}
+    packages: {
+        '/base/www/scripts/': {
+            defaultExtension: false,
+            format: 'register',
+            map: pathsMapping('/base/www/scripts/')
+        }
+    }
 });
 
 var specFiles =
   Object.keys(window.__karma__.files)
+    //.filter(function (path) { console.log('----------------'+path); return true; })
     .filter(function (path) { return /\.spec\.js$/.test(path); })
-    .filter(function (path) { console.log('spec file = ' + path); return true; })
+    
     .map(function (moduleName) { return System.import(moduleName); })
 
-//System
-//  .import('angular2/platform/browser').then(function (b) { b.BrowserDomAdapter.makeCurrent(); })
-//  .then(function () { return Promise.all(specFiles); })
-//  .then(function () { __karma__.start(); }, function (error) { __karma__.error(error.stack || error); });
+System
+  .import('angular2/platform/browser').then(function (b) { b.BrowserDomAdapter.makeCurrent(); })
+  .then(function () { return Promise.all(specFiles); })
+  .then(function () { __karma__.start(); }, function (error) { __karma__.error(error.stack || error); });
 
-System.import('/base/www/scripts/index');
-//__karma__.start();
+//System.import('app/bootstrap');
+System.import('index');
