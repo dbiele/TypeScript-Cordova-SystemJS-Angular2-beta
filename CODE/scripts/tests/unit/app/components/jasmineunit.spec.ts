@@ -1,4 +1,4 @@
-﻿// Code is borrowed from http://blogs.msdn.com/b/visualstudio/archive/2016/01/11/unit-testing-apache-cordova-apps-with-visual-studio-part-1.aspx 
+﻿// Code is borrowed from @kraigbro http://blogs.msdn.com/b/visualstudio/archive/2016/01/11/unit-testing-apache-cordova-apps-with-visual-studio-part-1.aspx 
 
 import {it, describe, expect} from 'angular2/testing';
 import {normalizeDataTest} from '../../../../app/components/jasmineunit';
