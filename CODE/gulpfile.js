@@ -11,8 +11,6 @@ var tsrequire = require('gulp-typescript');
 var karma = require('karma');
 var sourceMaps = require('gulp-sourcemaps');
 
-
-
 gulp.task('NPM+NODE.version', function (done) {
     // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
     var checkEnvironment = require('./tools/check-environment.js');
@@ -26,7 +24,7 @@ gulp.task('install.tsd.files', function (callback) {
     }, callback);
 });
 
-gulp.task('tslint', function () {
+gulp.task('lint.typescript', function () {
     // Rules can be found here
     // https://github.com/palantir/tslint#supported-rules
     var tslintConfig = {
@@ -85,7 +83,7 @@ function ts(filesRoot, filesGlob, filesDest, project) {
     //}))
     //.pipe(gulp.dest(filesDest));
 
-    var results =  gulp.src(filesGlob)
+    var results = gulp.src(filesGlob)
         .pipe(plugins.sourcemaps.init())
 		.pipe(plugins.typescript(project))
 
