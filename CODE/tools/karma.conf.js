@@ -100,7 +100,7 @@ module.exports = function (config) {
 
         // Browser notes: When using browsers ['Chrome', 'Firefox', 'IE'], if missing, add 'kjhtml' to reporters: ['progress', 'kjhtml'].
 
-        browsers: ['IE'],
+        browsers: ['Chrome'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
@@ -121,14 +121,13 @@ module.exports = function (config) {
           'karma-phantomjs2-launcher',
           'karma-firefox-launcher',
           'karma-ie-launcher'
-        ]
-
-        //customLaunchers: {
-        //    ChromeTravisCI: {
-        //        base: 'Chrome',
-        //        flags: ['--no-sandbox']
-        //    }
-        //}
+        ],
+        customLaunchers: {
+            ChromeTravisCI: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        }
     }
 
     /**
@@ -136,9 +135,9 @@ module.exports = function (config) {
  * Note that we also need to configure Travis so it enables Chrome.
  * See `before_script` in the `.travis.yml` file.
 */
-    //if (process.env.TRAVIS) {
-    //    config.browsers = ['ChromeTravisCI'];
-    //}
+    if (process.env.TRAVIS) {
+        config.browsers = ['ChromeTravisCI'];
+    }
 
     config.set(karmaconfig);
 }
