@@ -1,5 +1,6 @@
 // Embedded in index.html
-function bootstrapApp(m) {
+
+function bootstrapApp(m: any) {
     m.initialize();
 }
 // Example code to load jquery using systemjs
