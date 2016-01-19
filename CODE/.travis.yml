@@ -1,7 +1,7 @@
 language:
   - node_js
 node_js:
-  - '5'
+  - '5.4.1'
 before_install:
   # Setup `Chrome` instance.
   - export CHROME_BIN=chromium-browser
@@ -12,7 +12,5 @@ before_install:
   - npm install typings -g
 install:
   - npm install
-before_script:
-  - gulp build
 script:
-  - gulp unit
+  - gulp unit.test.karma
