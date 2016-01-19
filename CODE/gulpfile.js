@@ -27,16 +27,8 @@ gulp.task('install.tsd.files', function (callback) {
 gulp.task('lint.typescript', function () {
     // Rules can be found here
     // https://github.com/palantir/tslint#supported-rules
-    var tslintConfig = {
-        "rules": {
-            "semicolon": true,
-            "requireReturnType": true,
-            "requireParameterType": true,
-            "jsdoc-format": true,
-            "quotemark": [true, "single"],
-            "variable-name": [true, "allow-leading-underscore"]
-        }
-    };
+    // Microsoft Rules = https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/tslint.json
+    var tslintConfig = require('./tools/tslint.json');
     return gulp.src(['scripts/**/*.ts', '!scripts/typings/**'])
         //Custom rules can be added to configuration.  rulesDirectory: 'folder/folder'
       .pipe(tslint({
