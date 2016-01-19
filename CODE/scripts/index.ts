@@ -3,7 +3,7 @@
 /**
  * Called from start.ts after systemjs bootstap
  */
-export function initialize():void {
+export function initialize(): void {
     initializeCordova();
 }
 
@@ -18,7 +18,7 @@ function initializeCordova(): void {
     }
 }
 
-function onDeviceReady():void {
+function onDeviceReady(): void {
     console.log('Cordova: on device ready');
     appExternalModuleTest();
 }
