@@ -30,6 +30,7 @@ Adding the following
 - [X] Add Test Runner Jasmine
 - [ ] Add CI server Travis-CLI
 - [ ] Add Mock Cordova GPS functionality
+- [ ] Update folder structure to support Travis CI 
 
 # Getting Started #
 
