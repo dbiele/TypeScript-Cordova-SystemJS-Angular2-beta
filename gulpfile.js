@@ -1,4 +1,4 @@
-/// <binding AfterBuild='post.build.cleanup' />
+/// <binding />
 'use strict';
 
 
