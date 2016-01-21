@@ -7,7 +7,6 @@ import {normalizeDataTest} from '../../../../app/components/jasmineunit';
 describe('normalizeData tests', () => {
     /* tslint:disable:no-console */
     // First argument to "it" = name of the specific test that appears in the report.
-    console.log('testing');
     it('Accepts golden path data', () => {
         // Use the unit being tested as necessary
         let json: string = '{"Name": "Maria", "PersonalIdentifier": 2111858}';
