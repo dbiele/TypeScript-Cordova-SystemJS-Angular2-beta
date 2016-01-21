@@ -7,6 +7,9 @@
   "installed": {
     "systemjs/systemjs.d.ts": {
       "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
+    },
+    "howlerjs/howler.d.ts": {
+      "commit": "fab683ca77d0286b9d51aba6375deaceb41b22f5"
     }
   }
 }
