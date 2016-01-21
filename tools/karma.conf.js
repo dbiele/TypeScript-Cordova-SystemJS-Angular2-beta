@@ -100,7 +100,7 @@ module.exports = function (config) {
 
         // Browser notes: When using browsers ['Chrome', 'Firefox', 'IE'], if missing, add 'kjhtml' to reporters: ['progress', 'kjhtml'].
 
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS2'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
