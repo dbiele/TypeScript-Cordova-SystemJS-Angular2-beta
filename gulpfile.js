@@ -8,9 +8,10 @@ var tslint = require('gulp-tslint');
 var browserSync = require('browser-sync');
 var del = require('del');
 var plugins = require('gulp-load-plugins')();
-var tsrequire = require('gulp-typescript');
+var gulptypescript = require('gulp-typescript');
 var karma = require('karma');
 var sourceMaps = require('gulp-sourcemaps');
+var fs = require('fs');
 
 gulp.task('NPM+NODE.version', function (done) {
     // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
@@ -77,12 +78,6 @@ function karmaTsSpec() {
 }
 
 function ts(filesRoot, filesGlob, filesDest, project) {
-    //return gulp.src(filesRoot+'/**/*.ts')
-    //.pipe(tsrequire({
-    //    noImplicitAny: true,
-    //}))
-    //.pipe(gulp.dest(filesDest));
-
     var results = gulp.src(filesGlob)
         .pipe(plugins.sourcemaps.init())
 		.pipe(plugins.typescript(project))
@@ -104,6 +99,20 @@ function karmaTs(root) {
     ];
     return ts(filesRoot, filesGlob, filesDest, project);
 }
+
+
+/**
+ * This is used by the travis.yml file to compile the .ts files into .js before running the unit test.
+ */
+gulp.task("build.appfiles.typescript", function () {
+    var tsconfigPath = './scripts/tsconfig.json';
+    // Compile TypeScript code
+    if (fs.existsSync(tsconfigPath)) {
+        return gulp.src(['./scripts/**/*.ts', '!./scripts/typings/*'])
+            .pipe(gulptypescript(gulptypescript.createProject(tsconfigPath)))
+            .pipe(gulp.dest("www/scripts"));
+    }
+});
 
 function karmaRun(done) {
     return new karma.Server({
