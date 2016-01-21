@@ -21,6 +21,8 @@ Here's what your build will look like:
 
 [![Appetizeio](MANAGEMENT/md/media/taptoplay.PNG)](https://appetize.io/app/p860c4y7gf08v4q44eb860vfqm?device=nexus5&scale=75&orientation=portrait&osVersion=6.0)
 
+Click the appetize.io image above to view the app in action. 
+
 ## To Do ##
 
 Adding the following
@@ -30,7 +32,8 @@ Adding the following
 - [X] Add Test Runner Jasmine
 - [ ] Add CI server Travis-CLI
 - [ ] Add Mock Cordova GPS functionality
-- [ ] Update folder structure to support Travis CI 
+- [X] Update folder structure to support Travis CI 
+- [ ] Add taco-cli to allow non-VS2015 teams to work together 
 
 # Getting Started #
 
