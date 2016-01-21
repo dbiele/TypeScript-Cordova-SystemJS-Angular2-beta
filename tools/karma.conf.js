@@ -100,15 +100,15 @@ module.exports = function (config) {
 
         // Browser notes: When using browsers ['Chrome', 'Firefox', 'IE'], if missing, add 'kjhtml' to reporters: ['progress', 'kjhtml'].
 
-        browsers: ['PhantomJS2'],
+        browsers: ['Chrome'],
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultanous
-        // Especially on sevices like SauceLabs and Browserstack it makes sense to only launch a limited amount of browsers at once, and only start more when those have finished. Using this configuration you can sepcify how many browsers should be running at once at any given point in time.
+        // Especially on sevices like SauceLabs and Browserstack it makes sense to only launch a limited amount of browsers at once, and only start more when those have finished. Using this configuration you can specify how many browsers should be running at once at any given point in time.
         // Infinity
         concurrency: Infinity,
 
