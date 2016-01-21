@@ -12,5 +12,7 @@ before_install:
   - npm install typings -g
 install:
   - npm install
+before_script:
+  - gulp build.appfiles.typescript
 script:
   - gulp unit.test.karma
