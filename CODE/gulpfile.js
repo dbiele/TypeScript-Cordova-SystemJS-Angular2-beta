@@ -1,3 +1,4 @@
+/// <binding AfterBuild='post.build.cleanup' />
 'use strict';
 
 
@@ -63,6 +64,13 @@ function karmaClean() {
     return del(['.karma']);
 }
 
+// remove the test folder in scripts.
+function unitClean() {
+    //You can use multiple globbing patterns as you would with `gulp.src`
+    //If you are using del 2.0 or above, return its promise
+    return del(['www/scripts/tests']);
+}
+
 function karmaTsSpec() {
     // takes the .ts files from .karma/unit and converts to .js
     return karmaTs('scripts/tests/unit');
@@ -102,6 +110,10 @@ function karmaRun(done) {
         configFile: __dirname + '/tools/karma.conf.js'
     }, done).start();
 }
+
+gulp.task('post.build.cleanup', gulp.series(
+    unitClean
+));
 
 gulp.task('unit.test.karma', gulp.series(
     // Remember take in a callback or return a promise or event stream to avoid gulp 'The following tasks did not complete.'
