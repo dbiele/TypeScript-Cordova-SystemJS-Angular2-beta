@@ -135,8 +135,9 @@ module.exports = function (config) {
  * Note that we also need to configure Travis so it enables Chrome.
  * See `before_script` in the `.travis.yml` file.
 */
+    console.log('process.env = ' + process.env.TRAVIS)
     if (process.env.TRAVIS) {
-        config.browsers = ['ChromeTravisCI'];
+        karmaconfig.browsers = ['ChromeTravisCI'];
     }
 
     config.set(karmaconfig);
