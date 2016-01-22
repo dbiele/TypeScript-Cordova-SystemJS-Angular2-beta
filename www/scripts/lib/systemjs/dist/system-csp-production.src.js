@@ -1,5 +1,5 @@
 /*
- * SystemJS v0.19.13
+ * SystemJS v0.19.17
  */
 (function() {
 function bootstrap() {(function(__global) {
@@ -964,10 +964,12 @@ function applyPaths(paths, name) {
 
     // exact path match
     if (pathParts.length == 1) {
-      if (name == p) {
-        pathMatch = p;
-        break;
-      }
+      if (name == p)
+        return paths[p];
+      
+      // support trailing / in paths rules
+      else if (name.substr(0, p.length - 1) == p.substr(0, p.length - 1) && (name.length < p.length || name[p.length - 1] == p[p.length - 1]) && paths[p][paths[p].length - 1] == '/')
+        return paths[p].substr(0, paths[p].length - 1) + (name.length > p.length ? '/' + name.substr(p.length) : '');
     }
     // wildcard path match
     else {
@@ -1150,13 +1152,11 @@ function getMapMatch(map, name) {
   return bestMatch;
 }
 
-function setConditional(mode) {
+function setProduction(isProduction) {
   this.set('@system-env', this.newModule({
     browser: isBrowser,
     node: !!this._nodeRequire,
-    env: mode,
-    production: mode == 'production',
-    development: mode == 'development'
+    production: isProduction
   }));
 }
 
@@ -1193,7 +1193,7 @@ hookConstructor(function(constructor) {
     // support the empty module, as a concept
     this.set('@empty', this.newModule({}));
 
-    setConditional.call(this, 'development');
+    setProduction.call(this, false);
   };
 });
 
@@ -1410,6 +1410,10 @@ SystemJSLoader.prototype.config = function(cfg) {
   if ('warnings' in cfg)
     loader.warnings = cfg.warnings;
 
+  // transpiler deprecation path
+  if (cfg.transpilerRuntime === false)
+    loader._loader.loadedTranspilerRuntime = true;
+
   // always configure baseURL first
   if (cfg.baseURL) {
     var hasConfig = false;
@@ -1434,22 +1438,12 @@ SystemJSLoader.prototype.config = function(cfg) {
   if (cfg.pluginFirst)
     loader.pluginFirst = cfg.pluginFirst;
 
-  if (cfg.env) {
-    if (cfg.env != 'production' && cfg.env != 'development')
-      throw new TypeError('The config environment must be set to "production" or "development".');
-    setConditional.call(loader, cfg.env);
-  }
+  if (cfg.production)
+    setProduction.call(loader, true);
 
   if (cfg.paths) {
     for (var p in cfg.paths)
       loader.paths[p] = cfg.paths[p];
-  }
-
-  function noJSDecanonicalize(name) {
-    var normalized = loader.decanonicalize(name);
-    if (loader.defaultJSExtensions && name.substr(name.length - 3, 3) != '.js' && normalized.substr(normalized.length - 3, 3) == '.js')
-      return normalized.substr(0, normalized.length - 3);
-    return normalized;
   }
 
   if (cfg.map) {
@@ -1461,20 +1455,24 @@ SystemJSLoader.prototype.config = function(cfg) {
       if (typeof v !== 'string') {
         objMaps += (objMaps.length ? ', ' : '') + '"' + p + '"';
 
-        var normalized = noJSDecanonicalize(p);
+        var prop = loader.decanonicalize(p + (p[p.length - 1] != '/' ? '/' : ''));
+
+        // allow trailing '/' in package config
+        if (prop[prop.length - 1] == '/')
+          prop = prop.substr(0, prop.length - 1);
 
         // if a package main, revert it
         var pkgMatch = '';
         for (var pkg in loader.packages) {
-          if (normalized.substr(0, pkg.length) == pkg 
-              && (!normalized[pkg.length] || normalized[pkg.length] == '/') 
+          if (prop.substr(0, pkg.length) == pkg 
+              && (!prop[pkg.length] || prop[pkg.length] == '/') 
               && pkgMatch.split('/').length < pkg.split('/').length)
             pkgMatch = pkg;
         }
         if (pkgMatch && loader.packages[pkgMatch].main)
-          normalized = normalized.substr(0, normalized.length - loader.packages[pkgMatch].main.length - 1);
+          prop = prop.substr(0, prop.length - loader.packages[pkgMatch].main.length - 1);
 
-        var pkg = loader.packages[normalized] = loader.packages[normalized] || {};
+        var pkg = loader.packages[prop] = loader.packages[prop] || {};
         pkg.map = v;
       }
       else {
@@ -1490,7 +1488,7 @@ SystemJSLoader.prototype.config = function(cfg) {
     for (var i = 0; i < cfg.packageConfigPaths.length; i++) {
       var path = cfg.packageConfigPaths[i];
       var packageLength = Math.max(path.lastIndexOf('*') + 1, path.lastIndexOf('/'));
-      var normalized = noJSDecanonicalize(path.substr(0, packageLength) + '/');
+      var normalized = loader.decanonicalize(path.substr(0, packageLength) + '/');
       normalized = normalized.substr(0, normalized.length - 1) + path.substr(packageLength);
       packageConfigPaths[i] = normalized;
     }
@@ -1501,7 +1499,7 @@ SystemJSLoader.prototype.config = function(cfg) {
     for (var p in cfg.bundles) {
       var bundle = [];
       for (var i = 0; i < cfg.bundles[p].length; i++)
-        bundle.push(noJSDecanonicalize(cfg.bundles[p][i]));
+        bundle.push(loader.decanonicalize(cfg.bundles[p][i]));
       loader.bundles[p] = bundle;
     }
   }
@@ -1512,7 +1510,10 @@ SystemJSLoader.prototype.config = function(cfg) {
         throw new TypeError('"' + p + '" is not a valid package name.');
 
       // trailing slash allows paths matches here
-      var prop = noJSDecanonicalize(p + (p[p.length - 1] != '/' ? '/' : ''));
+      // NB deprecate this to just remove trailing / 
+      //    as decanonicalize doesn't respond to trailing / 
+      //    and paths wildcards should deprecate
+      var prop = loader.decanonicalize(p + (p[p.length - 1] != '/' ? '/' : ''));
 
       // allow trailing '/' in package config
       if (prop[prop.length - 1] == '/')
@@ -1556,7 +1557,7 @@ SystemJSLoader.prototype.config = function(cfg) {
         if (c == 'meta' && p[0] == '*')
           loader[c][p] = v[p];
         else if (normalizeProp)
-          loader[c][noJSDecanonicalize(p)] = v[p];
+          loader[c][loader.decanonicalize(p)] = v[p];
         else
           loader[c][p] = v[p];
       }
@@ -1890,9 +1891,9 @@ SystemJSLoader.prototype.config = function(cfg) {
     
       var pkgName = getPackage(this, decanonicalized);
 
-      var defaultExtension = pkgName && this.packages[pkgName].defaultExtension;
+      var defaultExtension = name[name.length - 1] == '/' ? false : pkgName && this.packages[pkgName].defaultExtension;
       
-      if (defaultExtension && (defaultExtension === false || defaultExtension != '.js') && name.substr(name.length - 3, 3) != '.js' && decanonicalized.substr(decanonicalized.length - 3, 3) == '.js')
+      if ((defaultExtension === false || defaultExtension && defaultExtension != '.js') && name.substr(name.length - 3, 3) != '.js' && decanonicalized.substr(decanonicalized.length - 3, 3) == '.js')
         decanonicalized = decanonicalized.substr(0, decanonicalized.length - 3);
 
       return decanonicalized;
@@ -1949,11 +1950,6 @@ SystemJSLoader.prototype.config = function(cfg) {
         return normalized + (defaultJSExtension ? '.js' : '');
 
       var subPath = normalized.substr(pkgName.length + 1);
-
-      // allow for direct package name normalization with trailling "/" (no main)
-      // that is normalize('pkg/') does not apply main, while normalize('./', 'pkg/') does
-      if (!subPath && normalized.length == pkgName.length + 1 && name[0] != '.')
-        return pkgName + subPath;
 
       return applyPackageConfigSync(loader, loader.packages[pkgName] || {}, pkgName, subPath, isPlugin);
     };
@@ -2021,11 +2017,6 @@ SystemJSLoader.prototype.config = function(cfg) {
         return (isConfigured ? Promise.resolve(pkg) : loadPackageConfigPath(loader, pkgName, pkgConfigMatch.configPath))
         .then(function(pkg) {
           var subPath = normalized.substr(pkgName.length + 1);
-
-          // allow for direct package name normalization with trailling "/" (no main)
-          // that is normalize('pkg/') does not apply main, while normalize('./', 'pkg/') does
-          if (!subPath && normalized.length == pkgName.length + 1 && name[0] != '.')
-            return Promise.resolve(pkgName + subPath);
 
           return applyPackageConfig(loader, pkg, pkgName, subPath, isPlugin);
         });
@@ -2997,7 +2988,8 @@ hookConstructor(function(constructor) {
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
     // bare minimum ignores for IE8
-    var ignoredGlobalProps = ['_g', 'sessionStorage', 'localStorage', 'clipboardData', 'frames', 'frameElement', 'external', 'mozAnimationStartTime', 'webkitStorageInfo', 'webkitIndexedDB'];
+    var ignoredGlobalProps = ['_g', 'sessionStorage', 'localStorage', 'clipboardData', 'frames', 'frameElement', 'external', 
+      'mozAnimationStartTime', 'webkitStorageInfo', 'webkitIndexedDB', 'mozInnerScreenY', 'mozInnerScreenX'];
 
     var globalSnapshot;
 
@@ -3991,10 +3983,36 @@ hookConstructor(function(constructor) {
   hook('locate', function(locate) {
     return function(load) {
       var loader = this;
+      var matched = false;
 
       if (!(load.name in loader.defined))
         for (var b in loader.bundles) {
-          if (loader.bundles[b].indexOf(load.name) != -1)
+          for (var i = 0; i < loader.bundles[b].length; i++) {
+            var curModule = loader.bundles[b][i];
+
+            if (curModule == load.name) {
+              matched = true;
+              break;
+            }
+
+            // wildcard in bundles does not include / boundaries
+            if (curModule.indexOf('*') != -1) {
+              var parts = curModule.split('*');
+              if (parts.length != 2) {
+                loader.bundles[b].splice(i--, 1);
+                continue;
+              }
+              
+              if (load.name.substring(0, parts[0].length) == parts[0] &&
+                  load.name.substr(load.name.length - parts[1].length, parts[1].length) == parts[1] &&
+                  load.name.substr(parts[0].length, load.name.length - parts[1].length - parts[0].length).indexOf('/') == -1) {
+                matched = true;
+                break;
+              }
+            }
+          }
+
+          if (matched)
             return loader['import'](b)
             .then(function() {
               return locate.call(loader, load);
@@ -4071,7 +4089,7 @@ hook('fetch', function(fetch) {
 });System = new SystemJSLoader();
 
 __global.SystemJS = System;
-System.version = '0.19.13 CSP';
+System.version = '0.19.17 CSP';
   // -- exporting --
 
   if (typeof exports === 'object')
