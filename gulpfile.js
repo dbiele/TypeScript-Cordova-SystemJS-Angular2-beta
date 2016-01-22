@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding BeforeBuild='copy.htmlfiles.to.www' />
 'use strict';
 
 
@@ -12,6 +12,7 @@ var gulptypescript = require('gulp-typescript');
 var karma = require('karma');
 var sourceMaps = require('gulp-sourcemaps');
 var fs = require('fs');
+var webdriver = require('gulp-protractor').webdriver_update;
 
 gulp.task('NPM+NODE.version', function (done) {
     // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
@@ -40,10 +41,9 @@ gulp.task('lint.typescript', function () {
 
 });
 
-//gulp.task('copy.htmlfiles.www', function () {
-//gulp.src(['./scripts/test/cssbutton/components/**/*.html', './scripts/test/md-to-html/**/*.html'])
-//.pipe(gulp.dest('./www/components/'));
-//});
+gulp.task('copy.htmlfiles.to.www', gulp.series(
+    copyHTMLToWWW
+));
 
 //gulp.task('browser.sync.js-watch', ['js'], browserSync.reload);
 
@@ -65,6 +65,8 @@ function karmaClean() {
     return del(['.karma']);
 }
 
+
+
 // remove the test folder in scripts.
 function unitClean() {
     //You can use multiple globbing patterns as you would with `gulp.src`
@@ -73,7 +75,7 @@ function unitClean() {
 }
 
 function karmaTsSpec() {
-    // takes the .ts files from .karma/unit and converts to .js
+    // takes the .ts files and converts to .js
     return karmaTs('scripts/tests/unit');
 }
 
@@ -100,19 +102,25 @@ function karmaTs(root) {
     return ts(filesRoot, filesGlob, filesDest, project);
 }
 
+function convertTSJS() {
+    var tsconfigPath = './scripts/tsconfig.json';
+    return gulp.src(['./scripts/**/*.ts', '!./scripts/typings/*'])
+        .pipe(gulptypescript(gulptypescript.createProject(tsconfigPath)))
+        .pipe(gulp.dest("www/scripts"));
+}
+
+function copyHTMLToWWW() {
+    return gulp.src(['./scripts/**/*.html'])
+    .pipe(gulp.dest('./www/scripts/'));
+}
 
 /**
  * This is used by the travis.yml file to compile the .ts files into .js before running the unit test.
  */
-gulp.task("build.appfiles.typescript", function () {
-    var tsconfigPath = './scripts/tsconfig.json';
-    // Compile TypeScript code
-    if (fs.existsSync(tsconfigPath)) {
-        return gulp.src(['./scripts/**/*.ts', '!./scripts/typings/*'])
-            .pipe(gulptypescript(gulptypescript.createProject(tsconfigPath)))
-            .pipe(gulp.dest("www/scripts"));
-    }
-});
+gulp.task("build.appfiles.typescript", gulp.series(
+    convertTSJS,
+    copyHTMLToWWW
+));
 
 function karmaRun(done) {
     return new karma.Server({
@@ -124,6 +132,57 @@ gulp.task('post.build.cleanup', gulp.series(
     unitClean
 ));
 
+
+//remove the protractor folder
+function protractorClean(){
+    return del(['.protractor']);
+}
+
+// Locate the protractor .ts files, convert to .js and save to .protractor folder
+function protractorTs2Js() {
+    var protractorTsProject = plugins.typescript.createProject('./scripts/tsconfig.json', {
+        outDir: '.protractor',
+        module: 'commonjs'
+    });
+    var filesRoot = 'scripts/tests/e2e';
+    var filesDest = `.protractor/${filesRoot}`;
+    var filesGlob = [
+		`${filesRoot}/**/*.ts`
+    ];
+
+    return ts(filesRoot, filesGlob, filesDest, protractorTsProject);
+}
+
+/**
+ * Ensures the selenium web drivers are installed
+ * Updates selenium standalone
+ * Updates chromedriver
+ */
+function protractorUpdate(done) {
+    webdriver({}, done);
+}
+
+/**
+ * Setup the test
+ */
+function protractorRun(cb) {
+    // use return and delete cb
+    gulp.src('.protractor/scripts/tests/e2e/**/*.spec.js')
+		.pipe(plugins.protractor.protractor({
+		    configFile: './tools/protractor.conf.js'
+		}))
+		.on('error', e => { throw e })
+        .on('end',cb)
+}
+
+/**
+ * copy all www files to .protractor
+ */
+function copyWWWToProtractor() {
+    return gulp.src(['./www/**', '!./www/scripts/tests/**'])
+    .pipe(gulp.dest(".protractor/"));
+}
+
 gulp.task('unit.test.karma', gulp.series(
     // Remember take in a callback or return a promise or event stream to avoid gulp 'The following tasks did not complete.'
     //clear the karma folder
@@ -132,4 +191,18 @@ gulp.task('unit.test.karma', gulp.series(
     //karmaTsSpec,
     // run the karma server
     karmaRun
+));
+
+/**
+ * Steps:
+ * Delete the .protractor folder.
+ * Convert .ts files to .js and save to .protractor folder.
+ */
+gulp.task('e2e.test.protractor', gulp.series(
+	protractorClean,
+    copyWWWToProtractor,
+	protractorTs2Js,
+	protractorUpdate,
+	protractorRun,
+	protractorClean
 ));
