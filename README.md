@@ -27,10 +27,10 @@ Click the appetize.io image above to view the app in action.
 
 Adding the following
 
-- [ ] Add E2E testing framework using protractor
+- [X] Add E2E testing framework using protractor
 - [X] Add Unit testing frameworks Karma
 - [X] Add Test Runner Jasmine
-- [ ] Add CI server Travis-CLI
+- [X] Add CI server Travis-CLI
 - [ ] Add Mock Cordova GPS functionality
 - [X] Update folder structure to support Travis CI 
 - [ ] Add taco-cli to allow non-VS2015 teams to work together 
