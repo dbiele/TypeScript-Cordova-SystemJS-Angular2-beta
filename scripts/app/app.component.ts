@@ -10,7 +10,7 @@ export class AppComponent {
     public dateDayMonthYearString: string = '';
     constructor() {
         let today: Date = new Date();
-        let dateDayMonthYear: string = `The current date is ${today.toLocaleDateString().}`;
+        let dateDayMonthYear: string = `The current date is ${today.toLocaleDateString()}.`;
         this.dateDayMonthYearString = dateDayMonthYear;
     }
 }
