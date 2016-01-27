@@ -1,4 +1,8 @@
 /// <binding BeforeBuild='copy.htmlfiles.to.www' />
+// 
+// Inspiration from https://github.com/ghpabs/angular2-seed-project
+
+
 'use strict';
 
 
@@ -13,6 +17,8 @@ var karma = require('karma');
 var sourceMaps = require('gulp-sourcemaps');
 var fs = require('fs');
 var webdriver = require('gulp-protractor').webdriver_update;
+var history = require('connect-history-api-fallback');
+var connect = require('gulp-connect');
 
 gulp.task('NPM+NODE.version', function (done) {
     // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
@@ -41,6 +47,9 @@ gulp.task('lint.typescript', function () {
 
 });
 
+/**
+ * Used before build to copy all the html file from ./scripts to ./www
+ */
 gulp.task('copy.htmlfiles.to.www', gulp.series(
     copyHTMLToWWW
 ));
@@ -134,15 +143,14 @@ gulp.task('post.build.cleanup', gulp.series(
 
 
 //remove the protractor folder
-function protractorClean(){
+function protractorClean() {
     return del(['.protractor']);
 }
 
 // Locate the protractor .ts files, convert to .js and save to .protractor folder
 function protractorTs2Js() {
     var protractorTsProject = plugins.typescript.createProject('./scripts/tsconfig.json', {
-        outDir: '.protractor',
-        module: 'commonjs'
+        outDir: '.protractor'
     });
     var filesRoot = 'scripts/tests/e2e';
     var filesDest = `.protractor/${filesRoot}`;
@@ -165,14 +173,20 @@ function protractorUpdate(done) {
 /**
  * Setup the test
  */
-function protractorRun(cb) {
+function protractorRun() {
     // use return and delete cb
-    gulp.src('.protractor/scripts/tests/e2e/**/*.spec.js')
-		.pipe(plugins.protractor.protractor({
-		    configFile: './tools/protractor.conf.js'
-		}))
-		.on('error', e => { throw e })
-        .on('end',cb)
+    // Spec patterns are relative to the current working directly when
+    //gulp.src('.protractor/scripts/tests/e2e/**/*.spec.js')
+    //	.pipe(plugins.protractor.protractor({
+    //	    configFile: './tools/protractor.conf.js'
+    //	}))
+    //	.on('error', e => { throw e })
+    //    .on('end', () => close(cb));
+    return gulp.src('.protractor/scripts/tests/e2e/**/*.spec.js')
+        .pipe(plugins.protractor.protractor({
+            configFile: './tools/protractor.conf.js'
+        }))
+        .on('error', e => { throw e })
 }
 
 /**
@@ -195,14 +209,43 @@ gulp.task('unit.test.karma', gulp.series(
 
 /**
  * Steps:
+ * Make sure the Connect Server is running
  * Delete the .protractor folder.
  * Convert .ts files to .js and save to .protractor folder.
+ * Check to see if selenium web drivers are installed.
+ * Run Protractor
  */
 gulp.task('e2e.test.protractor', gulp.series(
 	protractorClean,
     copyWWWToProtractor,
 	protractorTs2Js,
 	protractorUpdate,
-	protractorRun,
-	protractorClean
+	protractorRun
+	//protractorClean
 ));
+
+
+/**
+ * Runs a webserver
+ * Protractor connects to it.
+ * Only needs to run once and keep it running
+ */
+gulp.task('e2e.server', gulp.series(
+	gulp.parallel(watch, livereload)
+));
+
+// Gulp plugin to run a webserver
+// Info used in protractor.conf.js
+function livereload() {
+    return plugins.connect.server({
+        root: '.protractor',
+        livereload: false,
+        port: 8081,
+        middleware: (connect, opt) =>[history()]
+    });
+}
+
+function watch() {
+    // add ability to watch
+    // gulp.watch()
+}
