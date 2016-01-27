@@ -1,37 +1,21 @@
-﻿//import {verifyNoBrowserErrors} from 'angular2/src/testing/e2e_util';
-import {it, describe, expect, beforeEach} from 'angular2/testing';
+﻿// based on this demo
+// https://github.com/juliemr/protractor-demo 
+// Do not use imports.  It will cause errors
+// import {it, describe, expect, beforeEach} from 'angular2/testing';
+//import {verifyNoBrowserErrors} from '../e2e_util';
 
-describe('Text on screen', function () {
-
-    //afterEach(verifyNoBrowserErrors);
-    //beforeEach(() => {
-    //    browser.get('/');
-    //});
-
-    //describe('hello world app', function () {
-    //    var URL = 'scripts/app/app.component.html';
-    //    console.log('angular e2e testing');
-    //    it('should greet', function () {
-    //        browser.get(URL);
-
-    //        expect(getComponentText('test-app', '.title')).toEqual('Angular2');
-    //    });
-
-    //    it('should change greeting', function () {
-    //        browser.get(URL);
-
-    //        expect(getComponentText('test-app', '.title')).toEqual('howdy world!');
-    //    });
-    //});
-
+describe('Hello World', () => {
+    describe(' > e2e Example', () => {
+        //beforeEach(() => {
+            browser.get('/');
+            browser.waitForAngular();
+        //});
+        it(' > The App Title', () => {
+            expect(browser.getTitle()).toEqual('Cordova Angular2 Starter Kit');
+        });
+        it(' > Check content on screen', () => {
+            var headElement = element.all(by.css('#headElement')).first();
+            expect(headElement.getInnerHtml()).toContain('My First Angular2 App');
+        });
+    }); 
 });
-
-//function getComponentText(selector, innerSelector) {
-//    return browser.executeScript('return document.querySelector("' + selector + '").querySelector("' +
-//        innerSelector + '").textContent');
-//}
-
-//function clickComponentButton(selector, innerSelector) {
-//    return browser.executeScript('return document.querySelector("' + selector + '").querySelector("' +
-//        innerSelector + '").click()');
-//}
