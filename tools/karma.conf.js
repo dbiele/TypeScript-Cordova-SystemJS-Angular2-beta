@@ -56,7 +56,7 @@ module.exports = function (config) {
         exclude: [
           'www/**/config.js',
           'www/**/start.js',
-          'www/scripts/tests/**'
+          'www/scripts/tests/e2e/**/*.js'
         ],
 
         //All the Karma's urls get prefixed with the urlRoot. This is helpful when using proxies, as sometimes you might want to proxy a url that is already taken by Karma.
