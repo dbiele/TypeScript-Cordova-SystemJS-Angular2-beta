@@ -615,7 +615,63 @@ Publishing: Get it on the device
 
 
 # Unit Testing #
-Coming soon.
+Unit testing is being done with the Jasmine testing framework and Karma test runner.  
+
+## Overview ##
+This start kit is setup for unit tests written in TypeScript, Jasmine and the test runner is  executed using Gulp.  
+
+Tests must be written in the `./scripts/tests/unit` folder and should mirror the same structure as the non-tests folder.  For example, if a .ts file is located in `./scripts/app/components/testings/test.ts` the corresponding unit test should be located in `./scripts/tests/unit/app/components/testings/test.spec.ts`
+
+Unit test file names need to include the .spec.ts in the file name.  Example: `helloworld.spec.ts` Note: The gulpfile.js looks for `.spec.js` when looking for and loading unit test files.
+
+## How to run a test ##
+Before running a test, please publish your files so the `www` folder is up to date.  Currently, the files in `www` are tested.  
+
+To run a test using the Karma test runner, run the `unit.test.karma` gulp task.  
+
+![](MANAGEMENT\md\media\unit_testing.png)
+
+###Unit test PASSING ###
+When you run the test and it runs successfully, the gulp cli will show the status of the executed tests.  
+![](MANAGEMENT\md\media\unittest_success.PNG)
+
+###Unit test FAILING###
+When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the unit tests `describe` and `it` text.  In addition, the file causing the problem will be listed. I haven't figured out a good way to bug these files with VS2015 and TypeScript, but will post any updates when I find out more. 
+![](MANAGEMENT\md\media\unit_test_fail.png) 
+
+###Travis CI###
+The unit tests can also run on Travis Continuous Integration servers.  Place your files on a GitHub Repo, and setup Travis to sync with the repo.  Everytime a new push is done, a new build will be tested on the Travis CI servers.  
+
+Travis CI edits can be made to the .travis.yml folder to customize as necessary.
+
+If you want to make changes to Karma, please update the gulpfile.js, karma.conf.js and karma.shim.js.  
+
+# e2e Testing #
+
+This project is setup for e2e testing using Jasmine and Protractor. The project has a simple test in the `./scripts/tests/e2e` folder to demonstrate e2e in action.
+
+##Overview##
+This start kit is setup for e2e tests written in TypeScript, Jasmine and the e2e test runner is executed using Gulp.  
+
+Tests must be written in the `./scripts/tests/e2e` folder and should mirror the same structure as the non-tests folder.  For example, if a .ts file is located in `./scripts/app/components/testings/test.ts` the corresponding unit test should be located in `./scripts/tests/e2e/app/components/testings/test.spec.ts`
+
+## How to run a test ##
+Before running any tests, the files must be accessible on a web server. Running the `e2e.server` gulp task will create a web server and host the files with the `.protractor` folder as the root.  Note, the `.protractor` folder is created when the protractor gulp task is run.  More information below.  
+
+![](MANAGEMENT\md\media\e2e_server.PNG) 
+
+To run an e2e test, run the `e2e.test.protractor` gulp task.  The task will use all the `*.spec.js` files in the `/scripts/tests/e2e` folder as its test.  The `.protractor` folder is created, content is copied from the `.www` folder and the `./scripts/tests/e2e` .ts files are converted to .js and saved in the .protractor folder.
+
+![](MANAGEMENT\md\media\e2e_run.png) 
+
+## e2e PASSING##
+When the e2e tests pass, Gulp CLI displays the status of each test.
+![](MANAGEMENT\md\media\e2esuccess.png) 
+
+
+## e2e FAILING ##
+When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the e2e failing tests `describe` and `it` text.  In addition, the file causing the problem will be listed.
+![](MANAGEMENT\md\media\e2efail.png) 
 
 -
 -
