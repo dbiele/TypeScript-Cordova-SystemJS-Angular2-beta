@@ -27,7 +27,7 @@ Click the appetize.io image above to view the app in action.
 
 Adding the following
 
-- [X] Add E2E testing framework using protractor
+- [X] Add E2E testing framework using Protractor
 - [X] Add Unit testing frameworks Karma
 - [X] Add Test Runner Jasmine
 - [X] Add CI server Travis-CLI
