@@ -14,7 +14,7 @@ describe('Hello World', () => {
             expect(browser.getTitle()).toEqual('Cordova Angular2 Starter Kit');
         });
         it(' > Check content on screen', () => {
-            var headElement = element.all(by.css('#headElement')).first();
+            var headElement = element.all(by.css('#h1Element')).first();
             expect(headElement.getInnerHtml()).toContain('My First Angular2 App');
         });
     }); 
