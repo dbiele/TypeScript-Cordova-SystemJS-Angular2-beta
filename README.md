@@ -33,7 +33,8 @@ Adding the following
 - [X] Add CI server Travis-CLI
 - [ ] Add Mock Cordova GPS functionality
 - [X] Update folder structure to support Travis CI 
-- [ ] Add taco-cli to allow non-VS2015 teams to work together 
+- [ ] Add taco-cli to allow non-VS2015 teams to work together
+- [ ] Use Typings instead of TSD 
 
 # Getting Started #
 
