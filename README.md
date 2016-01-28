@@ -629,15 +629,15 @@ Before running a test, please publish your files so the `www` folder is up to da
 
 To run a test using the Karma test runner, run the `unit.test.karma` gulp task.  
 
-![](MANAGEMENT\md\media\unit_testing.png)
+![](MANAGEMENT/md/media/unit_testing.png)
 
 ###Unit test PASSING ###
 When you run the test and it runs successfully, the gulp cli will show the status of the executed tests.  
-![](MANAGEMENT\md\media\unittest_success.PNG)
+![](MANAGEMENT/md/media/unittest_success.PNG)
 
 ###Unit test FAILING###
 When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the unit tests `describe` and `it` text.  In addition, the file causing the problem will be listed. I haven't figured out a good way to bug these files with VS2015 and TypeScript, but will post any updates when I find out more. 
-![](MANAGEMENT\md\media\unit_test_fail.png) 
+![](MANAGEMENT/md/media/unit_test_fail.png) 
 
 ###Travis CI###
 The unit tests can also run on Travis Continuous Integration servers.  Place your files on a GitHub Repo, and setup Travis to sync with the repo.  Everytime a new push is done, a new build will be tested on the Travis CI servers.  
@@ -658,20 +658,20 @@ Tests must be written in the `./scripts/tests/e2e` folder and should mirror the 
 ## How to run a test ##
 Before running any tests, the files must be accessible on a web server. Running the `e2e.server` gulp task will create a web server and host the files with the `.protractor` folder as the root.  Note, the `.protractor` folder is created when the protractor gulp task is run.  More information below.  
 
-![](MANAGEMENT\md\media\e2e_server.PNG) 
+![](MANAGEMENT/md/media/e2e_server.PNG) 
 
 To run an e2e test, run the `e2e.test.protractor` gulp task.  The task will use all the `*.spec.js` files in the `/scripts/tests/e2e` folder as its test.  The `.protractor` folder is created, content is copied from the `.www` folder and the `./scripts/tests/e2e` .ts files are converted to .js and saved in the .protractor folder.
 
-![](MANAGEMENT\md\media\e2e_run.png) 
+![](MANAGEMENT/md/media/e2e_run.png) 
 
 ## e2e PASSING##
 When the e2e tests pass, Gulp CLI displays the status of each test.
-![](MANAGEMENT\md\media\e2esuccess.png) 
+![](MANAGEMENT/md/media/e2esuccess.png) 
 
 
 ## e2e FAILING ##
 When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the e2e failing tests `describe` and `it` text.  In addition, the file causing the problem will be listed.
-![](MANAGEMENT\md\media\e2efail.png) 
+![](MANAGEMENT/md/media/e2efail.png) 
 
 -
 -
