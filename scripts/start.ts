@@ -11,7 +11,7 @@ function bootstrapApp(m: Array<any>) {
 
 Promise.all([
     // Add as many System.imports as necessary. 
-    // Position of system.import('index') is important. The returned module array is used the bootstrapApp function above.
+    // Position of system.import('index') is important. The returned module array is using the bootstrapApp() function above.
     System.import('howler'),
     System.import('index')
 ])
