@@ -1,9 +1,9 @@
  /*!
   * https://github.com/paulmillr/es6-shim
-  * @license es6-shim Copyright 2013-2015 by Paul Miller (http://paulmillr.com)
+  * @license es6-shim Copyright 2013-2016 by Paul Miller (http://paulmillr.com)
   *   and contributors,  MIT License
-  * es6-sham: v0.33.13
-  * see https://github.com/paulmillr/es6-shim/blob/0.33.13/LICENSE
+  * es6-sham: v0.34.2
+  * see https://github.com/paulmillr/es6-shim/blob/0.34.2/LICENSE
   * Details and documentation:
   * https://github.com/paulmillr/es6-shim/
   */
@@ -17,7 +17,7 @@
     define(factory);
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like enviroments that support module.exports,
+    // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory();
   } else {
@@ -37,7 +37,7 @@
   var Object = globals.Object;
 
   // NOTE:  This versions needs object ownership
-  //        beacuse every promoted object needs to be reassigned
+  //        because every promoted object needs to be reassigned
   //        otherwise uncompatible browsers cannot work as expected
   //
   // NOTE:  This might need es5-shim or polyfills upfront
