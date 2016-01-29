@@ -35,6 +35,8 @@ Adding the following
 - [X] Update folder structure to support Travis CI 
 - [ ] Add taco-cli to allow non-VS2015 teams to work together
 - [ ] Use Typings instead of TSD 
+- [ ] Add HockeyApp Update Notifications, Crash Reporting, and Feedback
+- [ ] Add CodePush quickly push fixes to apps from app stores without re-submitting the entire app
 
 # Getting Started #
 
