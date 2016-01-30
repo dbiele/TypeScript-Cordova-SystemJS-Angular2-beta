@@ -36,7 +36,7 @@ Adding the following
 - [ ] Add taco-cli to allow non-VS2015 teams to work together
 - [ ] Use Typings instead of TSD 
 - [ ] Add HockeyApp Update Notifications, Crash Reporting, and Feedback
-- [ ] Add CodePush quickly push fixes to apps from app stores without re-submitting the entire app
+- [X] <s>Add CodePush quickly push fixes to apps from app stores without re-submitting the entire app</s>* Currently only supports React Native.
 
 # Getting Started #
 
@@ -678,6 +678,23 @@ When you run the test and there is a failure, the gulp cli will show the status 
 
 -
 -
+
+# Loading Audio #
+We'll use the CreateJS SoundJS library for working with Audio.
+
+### Audio Plugins ###
+Cordova requires the CordovaAudioPlugin class.  The Cordova Media Plugin is required and must be used.
+
+Install the plugins using the `config.xml > plugins`
+Add:
+- cordova-plugin-media
+
+[https://www.npmjs.com/package/cordova-plugin-media](https://www.npmjs.com/package/cordova-plugin-media)
+[http://createjs.com/docs/soundjs/classes/CordovaAudioPlugin.html](http://createjs.com/docs/soundjs/classes/CordovaAudioPlugin.html)
+
+/**
+ * @todo Expand description.
+ */
 
 ### Note: The following changes were made to the original project: https://github.com/dbiele/TypeScript-Cordova-SystemJS_no-JSPM : ###
 
