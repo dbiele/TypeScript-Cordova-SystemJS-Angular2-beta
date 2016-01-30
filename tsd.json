@@ -8,8 +8,14 @@
     "systemjs/systemjs.d.ts": {
       "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
     },
-    "howlerjs/howler.d.ts": {
-      "commit": "fab683ca77d0286b9d51aba6375deaceb41b22f5"
+    "createjs-lib/createjs-lib.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "preloadjs/preloadjs.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "soundjs/soundjs.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     }
   }
 }
