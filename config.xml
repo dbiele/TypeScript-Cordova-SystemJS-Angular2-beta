@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget android-versionCode="" defaultlocale="en-US" id="io.cordova.myapp52a830" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
+<widget android-versionCode="" defaultlocale="en-US" id="io.cordova.myapp52a830" version="1.0.0" windows-packageVersion="1.0.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
   <name>cordova_angular2beta_starter</name>
   <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, Windows, and Windows Phone.</description>
   <author email="dev@cordova.apache.org" href="http://cordova.io">Apache Cordova Team</author>
@@ -7,7 +7,7 @@
   <access origin="*" />
   <vs:features />
   <preference name="SplashScreen" value="screen" />
-  <preference name="windows-target-version" value="8.1" />
+  <preference name="windows-target-version" value="10.0" />
   <plugin name="cordova-plugin-whitelist" version="1" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
@@ -97,12 +97,18 @@
   <preference name="ShowTitle" value="True" />
   <preference name="InAppBrowserStorageEnabled" value="True" />
   <preference name="SuppressesIncrementalRendering" value="True" />
-  <vs:plugin name="cordova-plugin-crosswalk-webview" version="1.4.0" />
   <preference name="android-minSdkVersion" value="14" />
   <vs:plugin name="cordova-plugin-whitelist" version="1.2.0" />
   <preference name="xwalkVersion" value="15+" />
   <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
   <preference name="xwalkMode" value="embedded" />
   <preference name="xwalkMultipleApk" value="true" />
-  <plugin name="cordova-plugin-hockeyapp" version="2.1.0" src="https://github.com/peutetre/cordova-plugin-hockeyapp" />
+  <plugin name="cordova-plugin-hockeyapp" src="https://github.com/peutetre/cordova-plugin-hockeyapp" version="2.1.0" />
+  <vs:platformSpecificValues>
+    <vs:platformSpecificWidget id="cordova.angular2beta.starter" platformName="windows" version="1.0.0.5">
+      <vs:name>cordova_angular2beta_starter</vs:name>
+    </vs:platformSpecificWidget>
+  </vs:platformSpecificValues>
+  <plugin name="cordova-plugin-crosswalk-webview" version="1.4.0" />
+  <plugin name="cordova-plugin-media" version="2.1.0" />
 </widget>
