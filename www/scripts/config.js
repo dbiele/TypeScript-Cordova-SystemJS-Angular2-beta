@@ -3,7 +3,7 @@ System.config({
     defaultJSExtensions: true,
     transpiler: 'none',
     map: {
-        howler: './scripts/lib/howler/howler.js'
+        soundJS: './scripts/lib/createjs/soundjs-0.6.2.combined.js'
         //webgl_heatmap: './scripts/webgl-heatmap.js',
         //d3: './node_modules/d3/d3.js'
     }
