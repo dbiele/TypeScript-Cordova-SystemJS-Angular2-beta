@@ -7,8 +7,8 @@
 describe('Hello World', () => {
     describe(' > e2e Example', () => {
         //beforeEach(() => {
-            browser.get('/');
-            browser.waitForAngular();
+        browser.get('/');
+        browser.waitForAngular();
         //});
         it(' > The App Title', () => {
             expect(browser.getTitle()).toEqual('Cordova Angular2 Starter Kit');
@@ -17,5 +17,5 @@ describe('Hello World', () => {
             var headElement = element.all(by.css('#h1Element')).first();
             expect(headElement.getInnerHtml()).toContain('My First Angular2 App');
         });
-    }); 
+    });
 });
