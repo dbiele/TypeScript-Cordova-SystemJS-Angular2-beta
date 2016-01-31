@@ -34,7 +34,7 @@ Adding the following
 - [ ] Add Mock Cordova GPS functionality
 - [X] Update folder structure to support Travis CI 
 - [ ] Add taco-cli to allow non-VS2015 teams to work together
-- [ ] Use Typings instead of TSD 
+- [ ] Use Typings instead of TSD https://github.com/typings/typings
 - [X] Add HockeyApp Update Notifications, Crash Reporting, and Feedback:Android IOS
 - [X] <s>Add CodePush quickly push fixes to apps from app stores without re-submitting the entire app</s>* Currently only supports React Native.
 
