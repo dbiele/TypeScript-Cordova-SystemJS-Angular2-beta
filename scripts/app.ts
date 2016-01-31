@@ -11,14 +11,13 @@ import {HockeyAppServices} from './util/hockeyappservices';
  * Or, when cordova does not exist and deviceready is automatically called.
  */
 export function appExternalModuleTest(): void {
-    console.log('play audio');
     // Bootstrap Angular2 
     bootstrap(AppComponent);
-    console.log('now play audio');
+
     // Initialize soundJS
     let testAudio: AudioHandler = new AudioHandler();
-    testAudio.playAudio(['./www/audio/sound.mp3']);
-    //console.log('playing audio done');
+    testAudio.playAudio(['audio/audiocheck.net_linearfrequencytest.mp3']);
+
     //enable angular2 debug tools
     //bootstrap(AppComponent).then((appRef) => { enableDebugTools(appRef); });
 
