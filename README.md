@@ -16,10 +16,10 @@ Once the repository is downloaded, open the `cordova-angular2.sln` to start buil
 Debug > Android > Ripple is the easiest way to check if everything is working.  
 
 Here's what your build will look like:
-![MANAGEMENT/md/media/emulator_app.png](MANAGEMENT/md/media/emulator_app.png)
+![docs/md/media/emulator_app.png](docs/md/media/emulator_app.png)
 
 
-[![Appetizeio](MANAGEMENT/md/media/taptoplay.PNG)](https://appetize.io/app/p860c4y7gf08v4q44eb860vfqm?device=nexus5&scale=75&orientation=portrait&osVersion=6.0)
+[![Appetizeio](docs/md/media/taptoplay.PNG)](https://appetize.io/app/p860c4y7gf08v4q44eb860vfqm?device=nexus5&scale=75&orientation=portrait&osVersion=6.0)
 
 Click the appetize.io image above to view the app in action. 
 
@@ -49,7 +49,7 @@ Installing Visual Studio Tools for Apache Cordova
 Install the Apache Cordova feature during the VS2015 initital installation or add the feature to VS2015 by using `Add or Remove Programs > select Microsoft Visual Studio Community 2015 ... > Change > modify`. 
 
 Link to download [https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
-![](./MANAGEMENT/md/media/image1.png)
+![](./docs/md/media/image1.png)
 Add the Apache Cordova feature by selecting `Cross Platform Mobile Development > HTML/JavaScript (Apache Cordova)` 
 
 ### Visual Studio &gt; Extension and Updates ###
@@ -68,7 +68,7 @@ Cloud based version of Visual Studio.  You can learn more on the website. [https
 
 # Updating Cordova Options #
 -------------------
-![](./MANAGEMENT/md/media/config.xml.PNG)
+![](./docs/md/media/config.xml.PNG)
 The config.xml contains the setting for the Corodova app. It’s also know as the configuration designer. Double click the file in `Solution Explorer` or `right click > View Code`.
 
 ### Config.xml > Common
@@ -90,12 +90,12 @@ Most of the information is straight forward. Here are some notes:
 Update to specific versions of Cordova CLI using config.xml. Enter the version number into the text field. When the file is saved, the files are downloaded. You can get the latest version from this URL:
 <https://github.com/apache/cordova-cli/releases>
 
-![](./MANAGEMENT/md/media/image3.png)
+![](./docs/md/media/image3.png)
 
 Alternatively you can Npm install –g cordova –s However, config.xml will always override.
 
 ### Config.xml > Plugins
-![](./MANAGEMENT/md/media/config.xml2.PNG)
+![](./docs/md/media/config.xml2.PNG)
 
 I would recommend adding the following plugins:
 
@@ -123,7 +123,7 @@ Add the “cordova-plugin-whitelist” to dependencies in config.xml. Whitelist 
 -  Cordova-plugin-statusbar
 
 ### Config.xml > Windows
-![](./MANAGEMENT/md/media/config.xml3.PNG)
+![](./docs/md/media/config.xml3.PNG)
 Again, this is pretty straightforward.
 
 DisplayName: Use the DisplayName attribute to display a package name to users.
@@ -133,7 +133,7 @@ Package Name: Describes the contents of the package. A string between 3 and 50 c
 Change the Window Target Version to Windows 10.0. Debugging windows phone 8 requires Visual Studio 2013 installed.
 
 ### Config.xml > Android
-![](./MANAGEMENT/md/media/config.xml4.PNG)
+![](./docs/md/media/config.xml4.PNG)
 Version Code:
 The value is an integer so that other applications can programmatically evaluate it, for example to check an upgrade or downgrade relationship. You can set the value to any integer you want, however you should make sure that each successive release of your application uses a greater value.
 More Information: <http://developer.android.com/tools/publishing/versioning.html>
@@ -150,7 +150,7 @@ An integer designating the maximum API Level on which the application is designe
 An integer designating the API Level that the application targets. If not set, the default value equals that given to minSdkVersion
 
 ### Config.xml > IOS
-![](./MANAGEMENT/md/media/config.xml5.PNG)
+![](./docs/md/media/config.xml5.PNG)
 *Target Device*
 Set the target device to universal. Setting to a specific device to run application on a specific device or emulator
 
@@ -189,11 +189,11 @@ Note: Installing the TypeScript CLI does not upgrade Visual Studio 2015 version 
 
 Check if you have all the SDK’s by clicking `Tools > Options > Tools for Apache Cordova > Cordova Tools > Run Dependency Checker`.
 
-![](./MANAGEMENT/md/media/image4.png)
+![](./docs/md/media/image4.png)
  Java JDK is installed and using 64bit version. Ie C:\\Program Files\\Java\\jdk1.8.0\_60
  `Tools > Options > Tools for Apache Cordova`
 
-![](./MANAGEMENT/md/media/image5.png)
+![](./docs/md/media/image5.png)
 
 1.  Versions on Cordova can be updated independently. For example, update Cordova-Android to latest version. Instructions on how to do it.
     add to config.xml &lt;engine name="android" spec="4.1.0" /&gt;
@@ -237,8 +237,8 @@ Confirm scripts/tsconfig.json exists in scripts folder
 Exclude is another option. However, if exclude is used you must not use “files” object.
 
     "exclude": \[
-    "../MANAGEMENT/md/node\_modules",
-    "../MANAGEMENT/md/www"
+    "../docs/md/node\_modules",
+    "../docs/md/www"
     \]
 
 Solution Explorer
@@ -332,7 +332,7 @@ gulp.task(**'tslint'**, function () {
 
     require('es6-promise').polyfill();
     gulp.task(**'build.css.sass'**, function () {
-    gulp.src('./MANAGEMENT/md/scripts/components/materials/components/\*\*/\*.scss')
+    gulp.src('./docs/md/scripts/components/materials/components/\*\*/\*.scss')
     // Guilp-Sass runs the pre processor on the .scss files using Sass.
     // Gulp-AutoPrefixer post processes the .css files using PostCSS.
     // CSS and Folder structure is saved to destination folder.
@@ -341,7 +341,7 @@ gulp.task(**'tslint'**, function () {
     browsers: \['last 2 versions'\],
     cascade: false
     }))
-    .pipe(gulp.dest('./MANAGEMENT/md/www/css'));
+    .pipe(gulp.dest('./docs/md/www/css'));
     > });
 
 ### Add install tsd
@@ -349,7 +349,7 @@ gulp.task(**'tslint'**, function () {
     gulp.task(**'install.tsd'**, function (callback) {
     ts({
     command: 'reinstall',
-    config: './MANAGEMENT/md/tsd.json'
+    config: './docs/md/tsd.json'
     }, callback);
     });
 
@@ -359,7 +359,7 @@ gulp.task(**'tslint'**, function () {
     gulp.task(**'browser.sync'**, function () {
     browserSync.init({
     server: {
-    baseDir:"./MANAGEMENT/md/www/"
+    baseDir:"./docs/md/www/"
     }
     });
 
@@ -424,7 +424,7 @@ The following code needs to be added index.html to allow for the CDN’s, Framew
 # How to add SystemJS to our project. #
 
 Install systemJS as an NPM package.  Open packge.json and add the following:
-![](./MANAGEMENT/md/media/image12.png)
+![](./docs/md/media/image12.png)
 
 Saving package.json will automatically download the files to the node_modules folder.
 
@@ -435,7 +435,7 @@ www/scripts/lib/systemjs/
 3. Copy systemjs distribution files to the www folder. 
 
 
-![](./MANAGEMENT/md/media/image.systemjs.png)
+![](./docs/md/media/image.systemjs.png)
 
 Update index.html to link to the system.js files in www.
 
@@ -492,8 +492,8 @@ Merges are necessary in Cordova when devices need functionality unique to their 
 
 Adding systems-polyfill.js for systemjs
 
-Copy the systems-polyfills.js from the `jspm\_packages &gt; systemjs` folder and copy to `./MANAGEMENT/md/merges/windows/scripts` folder.
-![](./MANAGEMENT/md/media/image13.png)
+Copy the systems-polyfills.js from the `jspm\_packages &gt; systemjs` folder and copy to `./docs/md/merges/windows/scripts` folder.
+![](./docs/md/media/image13.png)
 
 Update the code in platformOverrides.js.  platformOverrides.js is added to index.html by default. to add the system-polysills.js to the html. It’s important that system-polyfills loads before system.js in the index.html
 
@@ -632,15 +632,15 @@ Before running a test, please publish your files so the `www` folder is up to da
 
 To run a test using the Karma test runner, run the `unit.test.karma` gulp task.  
 
-![](MANAGEMENT/md/media/unit_testing.png)
+![](docs/md/media/unit_testing.png)
 
 ###Unit test PASSING ###
 When you run the test and it runs successfully, the gulp cli will show the status of the executed tests.  
-![](MANAGEMENT/md/media/unittest_success.PNG)
+![](docs/md/media/unittest_success.PNG)
 
 ###Unit test FAILING###
 When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the unit tests `describe` and `it` text.  In addition, the file causing the problem will be listed. I haven't figured out a good way to bug these files with VS2015 and TypeScript, but will post any updates when I find out more. 
-![](MANAGEMENT/md/media/unit_test_fail.png) 
+![](docs/md/media/unit_test_fail.png) 
 
 ###Travis CI###
 The unit tests can also run on Travis Continuous Integration servers.  Place your files on a GitHub Repo, and setup Travis to sync with the repo.  Everytime a new push is done, a new build will be tested on the Travis CI servers.  
@@ -661,20 +661,20 @@ Tests must be written in the `./scripts/tests/e2e` folder and should mirror the 
 ## How to run a test ##
 Before running any tests, the files must be accessible on a web server. Running the `e2e.server` gulp task will create a web server and host the files with the `.protractor` folder as the root.  Note, the `.protractor` folder is created when the protractor gulp task is run.  More information below.  
 
-![](MANAGEMENT/md/media/e2e_server.PNG) 
+![](docs/md/media/e2e_server.PNG) 
 
 To run an e2e test, run the `e2e.test.protractor` gulp task.  The task will use all the `*.spec.js` files in the `/scripts/tests/e2e` folder as its test.  The `.protractor` folder is created, content is copied from the `.www` folder and the `./scripts/tests/e2e` .ts files are converted to .js and saved in the .protractor folder.
 
-![](MANAGEMENT/md/media/e2e_run.png) 
+![](docs/md/media/e2e_run.png) 
 
 ## e2e PASSING##
 When the e2e tests pass, Gulp CLI displays the status of each test.
-![](MANAGEMENT/md/media/e2esuccess.png) 
+![](docs/md/media/e2esuccess.png) 
 
 
 ## e2e FAILING ##
 When you run the test and there is a failure, the gulp cli will show the status of the executed tests along with the e2e failing tests `describe` and `it` text.  In addition, the file causing the problem will be listed.
-![](MANAGEMENT/md/media/e2efail.png) 
+![](docs/md/media/e2efail.png) 
 
 -
 -
