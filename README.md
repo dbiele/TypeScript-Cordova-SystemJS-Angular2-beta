@@ -627,7 +627,7 @@ Tests must be written in the `./scripts/tests/unit` folder and should mirror the
 
 Unit test file names need to include the .spec.ts in the file name.  Example: `helloworld.spec.ts` Note: The gulpfile.js looks for `.spec.js` when looking for and loading unit test files.
 
-## How to run a test ##
+## How to run a e2e test ##
 Before running a test, please publish your files so the `www` folder is up to date.  Currently, the files in `www` are tested.  
 
 To run a test using the Karma test runner, run the `unit.test.karma` gulp task.  
