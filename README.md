@@ -130,6 +130,8 @@ DisplayName: Use the DisplayName attribute to display a package name to users.
 
 Package Name: Describes the contents of the package. A string between 3 and 50 characters in length that consists of alpha-numeric, period, and dash characters.
 
+Version seems pretty obvious.  Use whatever approach is necessary.  Note: The Version > Revision number must be 0 when publishing for a final release.  Otherwise the app will fail App manifest testing.
+
 Change the Window Target Version to Windows 10.0. Debugging windows phone 8 requires Visual Studio 2013 installed.
 
 ### Config.xml > Android
@@ -252,10 +254,10 @@ Solution Explorer
 
 Make sure to show all files in the solution explorer.
 
-Windows Keystore
+Android Keystore
 ----------------
 
-Add Keystores for Windows release builds.
+Add Keystores for Android release builds.
 
 1.  Update build.json to include keystore for releasing to device. Publishing in release mode requires build.json to include keystore.
 
@@ -265,6 +267,7 @@ Add Keystores for Windows release builds.
     2.  Update build.json to include keystore information.
 
     3.  Note: If errors occur, this may be due to previous version of app on device. Delete app on device and rebuild.
+
 
 Install d.ts files for TypeScript
 ---------------------------------
@@ -624,7 +627,7 @@ Publishing: Get it on the device
 
 
 # Unit Testing #
-Unit testing is being done with the Jasmine testing framework and Karma test runner.  
+Unit testing for this starter kit is being done with the Jasmine testing framework and Karma test runner.  
 
 ## Overview ##
 This start kit is setup for unit tests written in TypeScript, Jasmine and the test runner is  executed using Gulp.  
@@ -649,7 +652,10 @@ When you run the test and there is a failure, the gulp cli will show the status 
 ![](docs/md/media/unit_test_fail.png) 
 
 ###Travis CI###
-The unit tests can also run on Travis Continuous Integration servers.  Place your files on a GitHub Repo, and setup Travis to sync with the repo.  Everytime a new push is done, a new build will be tested on the Travis CI servers.  
+The unit tests can also run on Travis Continuous Integration servers. Alternatively, Visual Studio Team Services has the ability to run CI tests.  Here's good documentation explaining the process:
+[https://msdn.microsoft.com/Library/vs/alm/Build/cordova/cordova-build](https://msdn.microsoft.com/Library/vs/alm/Build/cordova/cordova-build)
+
+Place your files on a GitHub Repo, and setup Travis to sync with the repo.  Everytime a new push is done, a new build will be tested on the Travis CI servers.  
 
 Travis CI edits can be made to the .travis.yml folder to customize as necessary.
 
