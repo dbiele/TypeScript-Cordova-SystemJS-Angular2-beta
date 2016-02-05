@@ -154,10 +154,16 @@ An integer designating the API Level that the application targets. If not set, t
 *Target Device*
 Set the target device to universal. Setting to a specific device to run application on a specific device or emulator
 
+### config.xml View Code
+There are a few things that need to be updated manually.
+
+<author email="dbieledevelop@outlook.com" href="http://dbiele.github.io/">Dean Biele</author> 
+Update the email and href as necessary.
+
 *Target iOS Version:*
 •iOS SDK 7.0 or later
 
-// TODO: Need more informationi
+// TODO: Need more information
 
 *Web Storage Backups:*
 Default is good.
