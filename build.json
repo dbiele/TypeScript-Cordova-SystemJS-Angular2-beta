@@ -1,7 +1,7 @@
 {
   "android": {
     "release": {
-      "keystore": "",
+      "keystore": "keystore\\myrelease-key.keystore",
       "storePassword": "",
       "alias": "",
       "password": "",
