@@ -34,10 +34,10 @@ Adding the following
 - [ ] Add Mock Cordova GPS functionality
 - [X] Update folder structure to support Travis CI 
 - [ ] Add taco-cli to allow non-VS2015 teams to work together
-- [ ] Use Typings instead of TSD https://github.com/typings/typings
+- [X] Use Typings instead of TSD https://github.com/typings/typings
 - [X] Add HockeyApp Update Notifications, Crash Reporting, and Feedback:Android IOS
 - [X] <s>Add CodePush quickly push fixes to apps from app stores without re-submitting the entire app</s>* Currently only supports React Native.
-- [ ] Add instructions on using HockeyApp for Enterprise beta testing.
+- [X] Add instructions on using HockeyApp for Enterprise beta testing.
 
 # Getting Started #
 
@@ -272,7 +272,34 @@ Add Keystores for Android release builds.
 
 Install d.ts files for TypeScript
 ---------------------------------
-In this example I'm using TSD, but Typings [https://github.com/typings/typings](https://github.com/typings/typings) seems to be an alternative solution that overcomes d.ts conflicts.
+
+#Using Typings to manage d.ts files
+# Install Typings CLI utility.
+
+We need to install `Typings` globally. This is import for Cordova projects. Currently, typings will always install relative to the typings.json.  Installing Typings in `package.json` will only allow us to install types in the root folder.
+
+    npm install typings -g
+
+Note: Remember to use command prompt or powershell as administrator.
+
+## Adding Ambient Typings d.ts files
+
+Open Command Prompt or PowerShell in the `/scripts` folder
+
+    typings install systemjs --ambient --save
+    typings install soundjs --ambient --save
+    typings install createjs-lib --ambient --save
+    typings install preloadjs --ambient --save
+
+More Information: [https://github.com/typings/typings](https://github.com/typings/typings) 
+
+Note: --ambient will install from DefinitelyTyped location
+
+
+To simplify integration with TypeScript, two files -  typings/main.d.ts  and  typings/browser.d.ts  - are generated which reference all the typings installed in the project only one of which can be used at a time.
+
+## TSD as alternative to Typings
+As an alternative to Typings, you can also use TSD to install d.ts files.
 
 1.  Install TSD and configure TSD to manage d.ts files. This only needs to be done once.
 
@@ -708,6 +735,101 @@ Add:
 /**
  * @todo Expand description.
  */
+
+
+## Company Hub / Hockey App ##
+
+Signing App for Hockey App or Company Hub:
+
+"Company app" to refer to a signed application that is intended for private distribution
+[https://msdn.microsoft.com/en-us/library/windows/desktop/jj835832(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/windows/desktop/jj835832(v=vs.85).aspx) 
+
+Location of files:
+`\TypeScript-Cordova-SystemJS-Angular2-beta\platforms\windows` 
+
+### Windows Packaging: ###
+
+    Name: io.cordova.myapp52a830
+    Publisher: CN=FakeCorp.com, L=Lowell, S=Massachusetts, C=US
+    Version: 1.0.0
+
+https://cordova.apache.org/docs/en/6.0.0/guide/platforms/win8/packaging.html 
+name and publisher can be set in the config.xml.
+
+    C:\Program Files (x86)\Windows Kits\10\bin\x86
+    makecert.exe -n "CN=FakeCorp.com" -r -eku "1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13" -e "01/01/2020" –h 0 -sv FakeCorp.com.pvk FakeCorp.com.cer
+
+Password = test
+
+Note: I had a problem copying and pasting. I had to type out the root key string into the command prompt.
+
+### Create the self signed pfx file ###
+C:\Program Files (x86)\Windows Kits\10\bin\x86
+
+    pvk2pfx -pvk FakeCorp.com.pvk -pi test -spc FakeCorp.com.cer -pfx FakeCorp.com.pfx -po test
+
+### Manually enter users personal certificate ###
+    certutil -user -p PASSWORD -importPFX FakeCorp.com.pfx
+    certutil -user -p test -importPFX D:\Code\testing_app_package\FakeCorp.com.pfx
+
+### Generate aetx ###
+You can only install apps over the air that are signed with your enterprise certificate from Symantec.  Generating a .aetx is only possible with a Symantec certificate
+    C:\Program Files (x86)\Microsoft SDKs\Windows Phone\v8.1\Tools\AETGenerator
+    AetGenerator.exe D:\Code\testing_app_package\FakeCorp.com.pfx test
+
+### Enterprise Mobile Code-Signing Certificate ###
+Symantec is the exclusive provider of code signing certificates for Microsoft App Hub service. Developers and software publishers join App Hub to distribute Windows Phone and Xbox 360 applications for download through Windows Marketplace.
+
+
+#Using Typings to manage d.ts files
+# Install Typings CLI utility.
+
+We need to install `Typings` globally. This is import for Cordova projects. Currently, typings will always install relative to the typings.json
+
+    npm install typings --global
+
+Note: Remember to use command prompt or powershell as administrator.
+
+## Adding Ambient Typings
+
+Open Command Prompt or PowerShell in the `/scripts` folder
+
+    typings install systemjs --ambient --save
+    typings install soundjs --ambient --save
+    typings install createjs-lib --ambient --save
+    typings install preloadjs --ambient --save
+
+Note: --ambient will install from DefinitelyTyped location
+
+
+To simplify integration with TypeScript, two files -  typings/main.d.ts  and  typings/browser.d.ts  - are generated which reference all the typings installed in the project only one of which can be used at a time.
+
+
+HockeyApp
+================================
+
+HockeyApp provides a way to distribute and test Apps without go through the app stores (google play, windows store, apple store).
+
+More info: [http://hockeyapp.net/features/](http://hockeyapp.net/features/)
+
+## Preparing App for upload
+Create an app package by selecting the project in Solution Explorer. Right Click the Project > Store > Create App Packages.
+
+![](docs/md/media/app_package.png) 
+
+App Package settings: Good detailed instructions in the link below.
+[https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt627715.aspx#create_package](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt627715.aspx#create_package) 
+
+When complete, the packaged app will be located in the project root folder /AppPackages and the .appx file can be used for distribution or sideloading.
+
+
+## Signing for Over the air installs
+For Windows 8, you can use the the native app and those builds need to be signed with Symantec certificate.  The Symantec certificate allows an .aetx file to be created. 
+
+For Windows 10 mobile you need to use the sideload or developer setting, while HockeyApp native app currently cant be used to download/install the app. However, you should be able to download the build to the device via our web UI.
+
+
+## Side Loading
 
 ### Note: The following changes were made to the original project: https://github.com/dbiele/TypeScript-Cordova-SystemJS_no-JSPM : ###
 
