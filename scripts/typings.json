@@ -1,0 +1,8 @@
+{
+  "ambientDependencies": {
+    "createjs-lib": "github:DefinitelyTyped/DefinitelyTyped/createjs-lib/createjs-lib.d.ts#17d36657b89ab615ece6425b7d6555ff8855ad24",
+    "preloadjs": "github:DefinitelyTyped/DefinitelyTyped/preloadjs/preloadjs.d.ts#89aedb70c31297a6ff6398f63c46448ac0189b28",
+    "soundjs": "github:DefinitelyTyped/DefinitelyTyped/soundjs/soundjs.d.ts#c9b2b234a5f8f28df50ded178be61786f2204518",
+    "systemjs": "github:DefinitelyTyped/DefinitelyTyped/systemjs/systemjs.d.ts#83af898254689400de8fb6495c34119ae57ec3fe"
+  }
+}
