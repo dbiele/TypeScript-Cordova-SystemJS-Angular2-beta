@@ -121,10 +121,32 @@ gulp.task("build.appfiles.typescript", gulp.series(
     copyHTMLToWWW
 ));
 
+//function karmaRun(done) {
+//    new karma.Server({
+//        configFile: __dirname + '/tools/karma.conf.js'
+//    }, function() {
+//        done();
+//    }).start();
+//}
+
+
+/**
+ * @param {Function} done - Callback to fire when karma is done
+ */
 function karmaRun(done) {
-    new karma.Server({
+    var server = new karma.Server({
         configFile: __dirname + '/tools/karma.conf.js'
-    }, done).start();
+    }, karmaCompleted);
+    server.start();
+
+    function karmaCompleted(karmaResult) {
+        console.log('Karma completed');
+        if (karmaResult === 1) {
+            done('karma: tests failed with code ' + karmaResult);
+        } else {
+            done();
+        }
+    }
 }
 
 gulp.task('post.build.cleanup', gulp.series(
