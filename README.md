@@ -805,7 +805,7 @@ Note: --ambient will install from DefinitelyTyped location
 To simplify integration with TypeScript, two files -  typings/main.d.ts  and  typings/browser.d.ts  - are generated which reference all the typings installed in the project only one of which can be used at a time.
 
 
-HockeyApp
+Using HockeyApp
 ================================
 
 HockeyApp provides a way to distribute and test Apps without go through the app stores (google play, windows store, apple store).
@@ -817,19 +817,31 @@ Create an app package by selecting the project in Solution Explorer. Right Click
 
 ![](docs/md/media/app_package.png) 
 
-App Package settings: Good detailed instructions in the link below.
+App Package settings instructions: Good detailed instructions in the link below.
 [https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt627715.aspx#create_package](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/mt627715.aspx#create_package) 
 
-When complete, the packaged app will be located in the project root folder /AppPackages and the .appx file can be used for distribution or sideloading.
+When the packaging is complete, the packaged app will be located in the project root folder `/AppPackages` and the `.appx` file can be used for distribution or sideloading.  The `Add-AppDevPackage.ps1` file can be used on Windows desktops for sideloading.
 
 
-## Signing for Over the air installs
-For Windows 8, you can use the the native app and those builds need to be signed with Symantec certificate.  The Symantec certificate allows an .aetx file to be created. 
+## Signing for Over the Air Installs
+For Windows 8, you can use the the native app and those builds need to be signed with `Symantec` certificate.  The `Symantec` certificate allows an .aetx file to be created. 
 
-For Windows 10 mobile you need to use the sideload or developer setting, while HockeyApp native app currently cant be used to download/install the app. However, you should be able to download the build to the device via our web UI.
+An `.aetx` token can only be created if a Enterprise Mobile Code Signing Certificate from `Symantec Corp` has been purchased. Without the certificate, `AetGenerator.exe` is unable to create an .aetx from the .pfx.
+
+Explanation on how to use AETX and Mobile Certificates.
+[https://msdn.microsoft.com/en-us/magazine/dn296515.aspx](https://msdn.microsoft.com/en-us/magazine/dn296515.aspx) 
+
+Download Root Certificates [https://knowledge.symantec.com/support/code-signing-support/index?page=content&id=SO20770&actp=search&viewlocale=en_US](https://knowledge.symantec.com/support/code-signing-support/index?page=content&id=SO20770&actp=search&viewlocale=en_US) 
+
+Instructions on how to sign an app [https://msdn.microsoft.com/en-us/library/windows/apps/jj735576(v=vs.105).aspx](https://msdn.microsoft.com/en-us/library/windows/apps/jj735576(v=vs.105).aspx)
 
 
-## Side Loading
+
+## Sideloading Apps
+
+Devices with `developer mode` enabled and unlocked can side load apps. 
+
+The HockeyApp native app currently cant be used to download/install the app. However, you should be able to download the app build (.appx) to the device via the HockeyApp web UI [https://rink.hockeyapp.net/manage/dashboard](https://rink.hockeyapp.net/manage/dashboard).
 
 ### Note: The following changes were made to the original project: https://github.com/dbiele/TypeScript-Cordova-SystemJS_no-JSPM : ###
 
