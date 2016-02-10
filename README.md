@@ -68,6 +68,7 @@ Install the Apache Cordova feature during the VS2015 initital installation or ad
 
 Link to download [https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)
 ![](./docs/md/media/image1.png)
+
 Add the Apache Cordova feature by selecting `Cross Platform Mobile Development > HTML/JavaScript (Apache Cordova)` 
 
 ### Visual Studio &gt; Extension and Updates ###
@@ -83,6 +84,27 @@ More information about TACO CLI [https://www.npmjs.com/package/taco-cli](https:/
 
 ### Visual Studio Code ###
 Cloud based version of Visual Studio.  You can learn more on the website. [https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+# Updating Node #
+-------------------
+Because Node is such an important part of developing with Cordova, I always try to use the latest version of Node.  That means Node needs to be downloaded separately. 
+
+Note: The gulp files will not load into the Task Runner using the VS2015 default version.  
+
+## Download NODE##
+Download the latest version of Node from the link below.  I always have success using the 32 bit version.
+
+[https://nodejs.org/en/](https://nodejs.org/en/)
+
+## Using Node in VS2015 ##
+To override the default version of Node, please add `C:\Program Files (x86)\nodejs` into
+
+`Tools > Options > Project and Solutions > External Web Tools`
+
+Make sure to add it in the 2nd position from the top of the list.
+![](./docs/md/media/vs_upgrade_node.PNG)
+
+VS2015 will now use this version of Node.
 
 # Updating Cordova Options #
 -------------------
