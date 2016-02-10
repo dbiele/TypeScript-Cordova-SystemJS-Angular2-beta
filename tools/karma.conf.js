@@ -142,6 +142,6 @@ module.exports = function (config) {
     }
 
     config.set(karmaconfig);
-    consol.log('config set');
+    console.log('config set');
 }
 
