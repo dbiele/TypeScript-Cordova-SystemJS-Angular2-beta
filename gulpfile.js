@@ -124,11 +124,8 @@ gulp.task("build.appfiles.typescript", gulp.series(
 function karmaRun(done) {
     new karma.Server({
         configFile: __dirname + '/tools/karma.conf.js'
-    }, function() {
-        done();
-    }).start();
+    }, () => { done();}).start();
 }
-
 
 /**
  * @param {Function} done - Callback to fire when karma is done
