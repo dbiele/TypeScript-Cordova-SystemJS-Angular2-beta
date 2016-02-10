@@ -2,12 +2,9 @@
 // 
 // Inspiration from https://github.com/ghpabs/angular2-seed-project
 
-
 'use strict';
 
-
 var gulp = require('gulp');
-var tsd = require('gulp-tsd');
 var tslint = require('gulp-tslint');
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -24,13 +21,6 @@ gulp.task('NPM+NODE.version', function (done) {
     // adding require here so it doesn't run every time the gulpfile.js is loaded and run.
     var checkEnvironment = require('./tools/check-environment.js');
     checkEnvironment({ requiredNpmVersion: '>=2.14.7 <3.0.0', requiredNodeVersion: '>=4.2.1 <5.0.0' }, done);
-});
-
-gulp.task('install.tsd.files', function (callback) {
-    tsd({
-        command: 'reinstall',
-        config: '.tsd.json'
-    }, callback);
 });
 
 gulp.task('lint.typescript', function () {
