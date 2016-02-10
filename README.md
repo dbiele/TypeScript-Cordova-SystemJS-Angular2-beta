@@ -11,6 +11,23 @@ Visual Studio 2015 project, source code and documentation
 
 The purpose of this VS2015 project is to provide a simple starter project structure for creating `TypeScript + Cordova + Angular2 beta' apps. 
 
+## Features ##
+
+- Folder structure for JavaScript, HTML, CSS + Cordova
+- Angular 2 sample code
+- Cordova
+- SystemJS
+- TypeScript
+- Visual Studio 2015 Community
+- E2E testing - Protractor sample
+- Unit testing - Karma sample
+- Test Runner - Jasmine sample
+- CI server - Travis-CI sample
+- Manage TypeScript definitions - Typings sample
+- Distribution Platform - HockeyApp instructions
+
+### Quick Start ###
+
 Once the repository is downloaded, open the `cordova-angular2.sln` to start building apps.  All files will automatically download when opened in VS2015 or when the app is published.
 
 Debug > Android > Ripple is the easiest way to check if everything is working.  
@@ -811,6 +828,8 @@ Using HockeyApp
 HockeyApp provides a way to distribute and test Apps without go through the app stores (google play, windows store, apple store).
 
 More info: [http://hockeyapp.net/features/](http://hockeyapp.net/features/)
+
+![](docs/md/media/HockeyApp.PNG) 
 
 ## Preparing App for upload
 Create an app package by selecting the project in Solution Explorer. Right Click the Project > Store > Create App Packages.
