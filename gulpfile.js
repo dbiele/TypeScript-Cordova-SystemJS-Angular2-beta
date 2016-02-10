@@ -122,7 +122,7 @@ gulp.task("build.appfiles.typescript", gulp.series(
 ));
 
 function karmaRun(done) {
-    return new karma.Server({
+    new karma.Server({
         configFile: __dirname + '/tools/karma.conf.js'
     }, done).start();
 }
