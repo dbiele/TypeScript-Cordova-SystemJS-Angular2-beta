@@ -115,7 +115,7 @@ The config.xml contains the setting for the Corodova app. It’s also know as th
 
 Most of the information is straight forward. Here are some notes:
 
-1.  Update the Common &gt; package name. Best practice: Package name should be domain name in reverse. io.github.dbiele
+1.  Update the Common &gt; package name. Best practice: Package name should be reverse-domain style identifier. `io.github.dbiele`
 
 > Update Security for Cordova
 
