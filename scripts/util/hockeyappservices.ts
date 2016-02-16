@@ -4,7 +4,7 @@ export class HockeyAppServices {
     private testService: any;
     private HOCKEY_APP_ID: string = '9ab0087d8f0444d5955e491c35c18936';
     private hasCordova: Cordova;
-    private constuctor() {
+    constructor() {
         this.hasCordova = window.cordova;
         if (this.hasCordova) {
             this.testService = hockeyapp.start(this.onSuccessCallback, this.onErrorCallback, this.HOCKEY_APP_ID);
