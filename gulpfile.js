@@ -46,7 +46,10 @@ gulp.task('copy.htmlfiles.to.www', gulp.series(
 
 //gulp.task('browser.sync.js-watch', ['js'], browserSync.reload);
 
-gulp.task('browser.sync', function () {
+/**
+ * Start a small webserver.
+ */
+gulp.task('browser.sync.start.webserver', function () {
     browserSync.init({
         server: {
             baseDir: "./www/"
