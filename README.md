@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta.svg)](https://travis-ci.org/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta) 
+﻿[![Build Status](https://travis-ci.org/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta.svg)](https://travis-ci.org/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta) 
 [![Join the chat at https://vs2015cordovaangular2.slack.com](http://dbiele.github.io/images/slackchat.svg)](https://vs2015cordovaangular2.slack.com)
 [![Issue Stats](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta/badge/pr)](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta)
 [![Issue Stats](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta/badge/issue)](http://issuestats.com/github/dbiele/TypeScript-Cordova-SystemJS-Angular2-beta)
 
 
-
+NOTE: This repo is out of date.  Working on updating to the latest Angular 2 now!
 Starter Kit for VS2015 + TypeScript-Cordova-SystemJS-Angular2-beta
 =========
 Visual Studio 2015 project, source code and documentation 
